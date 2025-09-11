@@ -3,12 +3,19 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
+// JSON import
+import navi from '@/db/navi.json';
+import type { NaviItem } from '@/db/type/common';
+
 type HdProps = { onOpenBooking?: () => void }
 
 export default function Hd({ onOpenBooking }: HdProps) {
   const [open, setOpen] = useState(false);
+  const items = (navi as NaviItem[]).filter((item) => item.display);
+
   const navLink = (to: string, label: string) => (
     <NavLink
+      key={to}
       to={to}
       className={({ isActive }) =>
         `px-3 py-2 rounded ${isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'}`
@@ -26,11 +33,7 @@ export default function Hd({ onOpenBooking }: HdProps) {
 
         {/* 데스크탑 네비 */}
         <nav className="hidden md:flex gap-1">
-          {navLink('/', 'Home')}
-          {navLink('/about', '소개')}
-          {navLink('/event', '이벤트')}
-          {navLink('/treatments', '트리트먼트')}
-          {navLink('/admin', '관리자')}
+          {items.map((item) => navLink(item.path, item.label))}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -46,12 +49,14 @@ export default function Hd({ onOpenBooking }: HdProps) {
                 <SheetTitle>메뉴</SheetTitle>
               </SheetHeader>
               <nav className="mt-4 flex flex-col gap-1">
-                {navLink('/', 'Home')}
-                {navLink('/about', '소개')}
-                {navLink('/event', '이벤트')}
-                {navLink('/treatments', '트리트먼트')}
-                {navLink('/admin', '관리자')}
-                <Button className="mt-3" onClick={() => { setOpen(false); onOpenBooking?.(); }}>
+                {items.map((item) => navLink(item.path, item.label))}
+                <Button
+                  className="mt-3"
+                  onClick={() => {
+                    setOpen(false);
+                    onOpenBooking?.();
+                  }}
+                >
                   예약하기
                 </Button>
               </nav>
