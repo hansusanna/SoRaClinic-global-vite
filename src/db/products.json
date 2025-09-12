@@ -31,5 +31,16 @@
     "created_at": "2025-09-07T14:15:00Z",
     "image_url": "/images/products/photo-17.jpg",
     "content": "<p>히알루론산부터 달팽이 점액까지, 깊은 보습을 위한 가장 효과적인 한국 스킨케어 성분.</p>"
+  },
+  {
+    "pk": 4,
+    "name": "계절별 스킨케어",
+    "category_id": 103,
+    "price": 35000,   
+    "discount_rate": 15,
+    "badge": "sale|normal|event",
+    "created_at": "2025-09-08T14:15:00Z",
+    "image_url": "/images/products/photo-18.jpg",
+    "content": "<p>모든 계절에 건강하고 빛나는 피부를 유지하기 위해 일년 내내 한국 스킨케어 루틴을 수정하는 방법을 배우세요.</p>"
   }
 ]

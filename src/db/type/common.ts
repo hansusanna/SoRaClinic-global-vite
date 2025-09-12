@@ -26,3 +26,8 @@ export interface Product {
   image_url: string;       // 이미지 경로
   content: string;         // HTML 포함된 설명
 }
+
+export interface Category {
+    id: string;   // 카테고리 고유 ID
+    name: string; // 카테고리 이름 
+  }

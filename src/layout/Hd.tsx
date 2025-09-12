@@ -33,7 +33,18 @@ export default function Hd({ onOpenBooking }: HdProps) {
 
         {/* 데스크탑 네비 */}
         <nav className="hidden md:flex gap-1">
-          {items.map((item) => navLink(item.path, item.label))}
+          <ul className="flex space-x-4">
+          {
+          navi
+            .filter((item: NaviItem) => item.display)
+            .map((item: NaviItem) => (
+              <li key={item.pk}>
+                <Link to={item.path}> {item.label}</Link>
+              </li>
+            ))
+          }
+          </ul>
+          {/* {items.map((item) => navLink(item.path, item.label))} fiier 적용하기전*/}
         </nav>
 
         <div className="flex items-center gap-2">
