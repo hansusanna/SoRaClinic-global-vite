@@ -12,6 +12,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "types": ["vite/client", "react", "react-dom"],
 
     /* Bundler mode */
     "moduleResolution": "Bundler",

@@ -1,10 +1,14 @@
-[ 
-    { "pk":0, "path": "/about", "label": "About", "display": true }, 
-    { "pk":1, "path": "/about/ceo", "label": "원장 인사말", "display": true },
-    { "pk":2,  "path": "/about/way", "label": "오시는 길", "display": true }, 
-    { "pk":3,  "path": "/about/brand", "label": "소라클리닉 소개", "display": true },
-    { "pk":4,  "path": "/event/101", "label": "궁극의 K-뷰티 루틴", "display": false},
-    { "pk":5,  "path": "/event/102", "label": "보습 히어로", "display": true },
-    { "pk":6,  "path": "/event/103", "label": "계절별 스킨케어", "display": true }
-
- ]
+[
+  { "pk": 0, "path": "/event", "label": "EVENTS", "display": true },
+  { "pk": 1, "path": "/about", "label": "About", "display": true },
+  { "pk": 2, "path": "/treatments", "label": "TREATMENTS", "display": true },
+  { "pk": 3, "path": "/contact", "label": "CONTACT", "display": true },
+  {
+    "pk": 4,
+    "path": "/event/101",
+    "label": "궁극의 K-뷰티 루틴",
+    "display": false
+  },
+  { "pk": 5, "path": "/event/102", "label": "보습 히어로", "display": true },
+  { "pk": 6, "path": "/event/103", "label": "계절별 스킨케어", "display": true }
+]
