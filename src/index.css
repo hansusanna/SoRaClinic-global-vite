@@ -2,78 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #1640ff → hsl(229,100%,54%) | #2EC4B6 → hsl(174,62%,48%) | #FFCA28 → hsl(45,100%,58%) | #cbf3f0 → hsl(175 63% 88%)*/
 :root {
   --background: 0 0% 100%;
   --foreground: 222 84% 4.9%;
-  --subbg: 175 63% 88%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 222 84% 4.9%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 84% 4.9%;
-
-  /* BRAND */
-  --primary: 229 100% 54%;              /* SoRa Blue: #1640ff */
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 174 62% 48%;             /* Teal: #2EC4B6 */
-  --secondary-foreground: 0 0% 100%;
-
-  --accent: 45 100% 58%;                /* Accent Yellow: #FFCA28 */
-  --accent-foreground: 222 84% 4.9%;
-
-  --muted: 192 4% 49%;                  /* #777F81 근처 */
-  --muted-foreground: 0 0% 40%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-
   --border: 214 32% 91%;
   --input: 214 32% 91%;
-  --ring: 229 100% 54%;                 /* = primary */
-
-  /* Radius */
-  --radius: 14px;                       /* SoRa: 둥글게 (원하면 12~16px) */
+  --ring: 229 100% 54%;
+  --primary: 229 100% 54%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 174 62% 48%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 45 100% 58%;
+  --accent-foreground: 222 84% 4.9%;
+  --radius: 14px;
+  --font-sans: "Pretendard", system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", sans-serif;
+  --tiffany: 174 62% 48%;
 }
-
-/* Dark scheme */
 .dark {
   --background: 222 44% 6%;
   --foreground: 210 40% 98%;
-
-  --card: 222 44% 6%;
-  --card-foreground: 210 40% 98%;
-
-  --popover: 222 44% 6%;
-  --popover-foreground: 210 40% 98%;
-
-  --primary: 229 100% 60%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 174 62% 52%;
-  --secondary-foreground: 0 0% 100%;
-
-  --accent: 45 100% 62%;
-  --accent-foreground: 222 84% 4.9%;
-
-  --muted: 215 27% 16%;
-  --muted-foreground: 215 20% 65%;
-
-  --destructive: 0 62% 45%;
-  --destructive-foreground: 0 0% 98%;
-
   --border: 215 27% 16%;
   --input: 215 27% 16%;
   --ring: 229 100% 60%;
+  --primary: 229 100% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 174 62% 52%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 45 100% 62%;
+  --accent-foreground: 222 84% 4.9%;
 }
-
-/* 폰트: Pretendard 우선 사용 */
 @layer base {
-  :root {
-    --font-sans: "Pretendard", system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Apple SD Gothic Neo", sans-serif;
-  }
-  * { @apply border-border; }
   body { @apply bg-background text-foreground font-sans; }
+  h1,h2,h3,h4,h5,h6 { font-weight: 600; }
 }

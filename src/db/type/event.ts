@@ -1,9 +1,12 @@
 export interface EventItem {
   id: number;
   title: string;
+  category: string;  
+  discount: string;         
+  originalPrice: string;    
+  eventPrice: string;   
+  image: string;             
   description: string;
-  startDate: string;
-  endDate?: string;
-  thumbnail?: string;
-  isActive: boolean;
+  validUntil: string;       
+  includes: string[];        
 }

@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "title": "Laser Hair Removal Package",
+    "category": "laser treatment",
+    "discount": "40% OFF",
+    "originalPrice": "$800",
+    "eventPrice": "$480",
+    "validUntil": "Valid until March 31, 2026",
+    "image": "/images/event/event_img01.png",
+    "description": "Complete laser hair removal package for international patients. Premium IPL technology with guaranteed smooth, beautiful skin results.",
+    "includes": ["6 Sessions Full Body", "Free Consultation", "Aftercare Products", "English-speaking Staff"]
+  },
+  {
+    "id": 2,
+    "title": "Botox Anti-Aging Treatment",
+    "category": "injectable",
+    "discount": "30% OFF",
+    "originalPrice": "$600",
+    "eventPrice": "$420",
+    "validUntil": "Valid until April 15, 2026",
+    "image": "/images/event/event_img02.png",
+    "description": "Professional Botox treatment for youthful, wrinkle-free skin. FDA-approved products with experienced Korean aesthetic doctors.",
+    "includes": ["Forehead + Eyes + Frown Lines", "Post-Treatment Care", "2-Week Follow-up", "International Certification"]
+  },
+  {
+    "id": 3,
+    "title": "Dermal Filler Enhancement",
+    "category": "injectable",
+    "discount": "25% OFF",
+    "originalPrice": "$900",
+    "eventPrice": "$675",
+    "validUntil": "Valid until March 20, 2026",
+    "image": "/images/event/event_img03.png",
+    "description": "Premium hyaluronic acid fillers for facial contouring and volume restoration with natural-looking Korean beauty results.",
+    "includes": ["1ml Premium Filler", "Face Mapping Analysis", "Numbing Cream", "Emergency Contact Support"]
+  },
+  {
+    "id": 4,
+    "title": "Glass Skin Facial Package",
+    "category": "facial treatment",
+    "discount": "35% OFF",
+    "originalPrice": "$400",
+    "eventPrice": "$260",
+    "validUntil": "Valid until April 30, 2025",
+    "image": "/images/event/event_img04.png",
+    "description": "Achieve the famous Korean \"glass skin\" look with our signature hydrating facial treatment perfect for achieving porcelain-like complexion.",
+    "includes": ["3 Session Package", "Korean Skincare Products", "Home Care Kit", "Skin Analysis Report"]
+  },
+  {
+    "id": 5,
+    "title": "K-Beauty Glow Treatment",
+    "category": "brightening",
+    "discount": "50% OFF",
+    "originalPrice": "$1200",
+    "eventPrice": "$600",
+    "validUntil": "Valid until May 15, 2026",
+    "image": "/images/event/event_img05.png",
+    "description": "Comprehensive K-beauty glow program combining LED therapy, vitamin C infusions, and Korean brightening techniques for luminous skin.",
+    "includes": ["6-Month Treatment Plan", "LED Light Therapy", "Vitamin C Serums", "Weekly Monitoring"]
+  },
+  {
+    "id": 6,
+    "title": "Premium Skincare Routine",
+    "category": "skincare",
+    "discount": "45% OFF",
+    "originalPrice": "$1500",
+    "eventPrice": "$825",
+    "validUntil": "Valid until March 25, 2025",
+    "image": "/images/event/event_img06.png",
+    "description": "Ultimate Korean beauty package combining multiple advanced treatments for comprehensive skin transformation and anti-aging.",
+    "includes": ["Microneedling + PRP", "Chemical Peel", "Vitamin C Infusion", "3-Month Skincare Kit"]
+  },
+  {
+    "id": 7,
+    "title": "Hydrating Beauty Boost",
+    "category": "hydration",
+    "discount": "30% OFF",
+    "originalPrice": "$350",
+    "eventPrice": "$245",
+    "validUntil": "Valid until April 10, 2026",
+    "image": "/images/event/event_img07.png",
+    "description": "Deep hydration treatment using Korean beauty secrets for plump, dewy skin that glows from within.",
+    "includes": ["Hyaluronic Acid Therapy", "Collagen Mask", "Recovery Products", "Follow-up Consultation"]
+  },
+  {
+    "id": 8,
+    "title": "Face Mask Therapy Special",
+    "category": "mask treatment",
+    "discount": "40% OFF",
+    "originalPrice": "$500",
+    "eventPrice": "$300",
+    "validUntil": "Valid until March 28, 2026",
+    "image": "/images/event/event_img08.png",
+    "description": "Luxurious face mask therapy using premium Korean ingredients for intensive skin repair and rejuvenation.",
+    "includes": ["Professional Face Masks", "Serum Infusion", "Healing Treatment", "Post-Care Instructions"]
+  },
+  {
+    "id": 9,
+    "title": "Beauty Consultation Package",
+    "category": "consultation",
+    "discount": "FREE",
+    "originalPrice": "$150",
+    "eventPrice": "$0",
+    "validUntil": "Available Daily",
+    "image": "/images/event/event_img09.png",
+    "description": "Comprehensive beauty consultation with our Korean aesthetic specialists to create your personalized beauty transformation plan.",
+    "includes": ["Detailed Skin Analysis", "Treatment Plan", "Product Recommendations", "Multi-language Support"]
+  },{
+    "id": 10,
+    "title": "K-Beauty Glow Treatment",
+    "category": "brightening",
+    "discount": "50% OFF",
+    "originalPrice": "$1200",
+    "eventPrice": "$600",
+    "validUntil": "Valid until May 15, 2026",
+    "image": "/images/event/event_img10.png",
+    "description": "Comprehensive K-beauty glow program combining LED therapy, vitamin C infusions, and Korean brightening techniques for luminous skin.",
+    "includes": ["6-Month Treatment Plan", "LED Light Therapy", "Vitamin C Serums", "Weekly Monitoring"]
+  }
+]

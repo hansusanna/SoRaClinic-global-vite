@@ -13,7 +13,7 @@ import AdminLoginPage from './components/pages/AdminLogin'
 export default function Routers() {
   return (
     <Routes>
-      {/* ✅ 레이아웃 라우트 */}
+      {/* 레이아웃 라우트 */}
       <Route element={<Layout />}>
         {/* index = "/" */}
         <Route index element={<HomePage />} />

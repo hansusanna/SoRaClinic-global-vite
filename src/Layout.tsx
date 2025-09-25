@@ -18,7 +18,7 @@ const Layout: React.FC = () => {
       {/* 공통 레이아웃, 헤더 등 */}
       <Hd onOpenBooking={() => setBookingOpen(true)} />
       <div>
-        {/* ✅ 여기서 children 대신 Outlet */}
+        {/* children 대신 Outlet */}
         <Outlet />
         <Quick />
       </div>

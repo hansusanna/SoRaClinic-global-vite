@@ -1,30 +1,132 @@
-import { useParams } from "react-router-dom";
+import type { Doctor, TimelineItem } from "@/db/type/about";
+import doctorsData from "@/db/doctors.json";
+import timelineData from "@/db/timeline.json";
 
-export default function About() {  
-  // const content = useParams(); 선생님 코드 
-    // content 파라미터만 추출 (없을 수도 있으니 ?)
-  const { content } = useParams<{ content?: string }>(); // 챗이 알려준 코드 
+export default function About() {
+  const doctors = doctorsData as Doctor[];
+  const timeline = timelineData as TimelineItem[];
 
   return (
-    // <div> About { content ? content : '대메뉴' } </div> //선생님 코드
-     <div>About {content ?? "대메뉴"}</div> // 챗이 알려준 코드 
-   
-    // <div className="p-6 space-y-6">
-    //   {/*공통(default)**으로 충분한 페이지 → 그냥 <Seo /> */}
-    //   {/* SEO 메타 태그 개별 SEO가 필요한 페이지 → props를 넣어 덮어쓰기 */}
-    //   {/* <Seo
-    //     title="About — SoRa Clinic"
-    //     description="SoRa Clinic 소개 페이지"
-    //     canonical="https://sora-react.vercel.app/about"
-    //     ogImage="/icons/og-about.png"
-    //   /> */}
+    <div className="relative min-h-screen pt-5">
+      {/* 배경 그라디언트 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 to-orange-50/20" />
+      {/* 컨텐츠 래퍼 */}
+      <div className="relative z-20 m-[30px] p-5">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <h1 className="text-5xl mb-6 text-gray-800">
+              About <span className="text-[#0ABAB5]">SoRa</span>
+              <span className="text-pink-400">Clinic</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              We are passionate K-beauty experts dedicated to bringing you the authentic glass skin experience. 
+              With years of expertise in Korean skincare traditions and a commitment to excellence, we make every treatment extraordinary.
+            </p>
+          </div>
 
-    //   {/* 페이지 컨텐츠 */}
-    //   <h1 className="text-3xl font-bold">About SoRa Clinic</h1>
-    //   <p className="text-lg text-gray-700">
-    //     SoRa Clinic은 글로벌 K-뷰티 전문 클리닉으로, 최고의 스킨케어 서비스를 제공합니다.
-    //   </p>
-    // </div>
-    
-  )
+          {/* Timeline Section */}
+          <section className="mb-[70px] mx-[20px] px-[30px]">
+            <h2 className="text-4xl text-center mb-12 text-gray-800">Our Beauty Journey</h2>
+            <div className="relative">
+              <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-[#0ABAB5]/30" />
+              <div className="space-y-12">
+                {timeline.map((item, index) => (
+                  <div
+                    key={`${item.year}-${index}`}
+                    className={`flex items-center ${
+                      index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                    }`}
+                  >
+                    <div
+                      className={`w-1/2 ${
+                        index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"
+                      }`}
+                    >
+                      <div className="rounded-2xl bg-white/80 backdrop-blur-sm border border-[#0ABAB5]/20 transition-all duration-300 hover:shadow-xl">
+                        <div className="p-6">
+                          <h3 className="text-2xl text-[#0ABAB5] mb-2 font-bold">{item.year}</h3>
+                          <h4 className="text-lg mb-3 text-gray-800 font-semibold">{item.title}</h4>
+                          <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-4 h-4 bg-gradient-to-r from-[#0ABAB5] to-pink-400 rounded-full relative z-10 border-4 border-white shadow-lg" />
+                    <div className="w-1/2" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Doctors Section */}
+          <section className="mb-[70px] mx-[30px]">
+            <h2 className="text-4xl text-center mb-12 text-gray-800">Meet Our Beauty Experts</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {doctors.map((member, index) => (
+                <div key={`${member.name}-${index}`} className="text-center group">
+                  <div className="relative mb-6 overflow-hidden rounded-full w-48 h-48 mx-auto border-4 border-pink-100 transition-all duration-300 group-hover:border-[#0ABAB5]">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = "/img/placeholder-avatar.png";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0ABAB5]/20 to-pink-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
+                  <h3 className="text-xl mb-1 text-gray-800 font-semibold">{member.name}</h3>
+                  <p className="text-[#0ABAB5] font-medium">{member.role}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Mission Section */}
+          <section>
+            <div className="rounded-3xl p-12 border bg-gradient-to-br from-pink-50/80 via-white to-purple-50/60">
+              <div className="text-center">
+                <h2 className="text-4xl mb-8 text-gray-800">Our Mission</h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  At SoRa Clinic, we believe that everyone deserves to achieve their dream skin. Our mission is to bring the authentic K-beauty 
+                  experience to you through personalized treatments, expert care, and the finest Korean skincare traditions. We combine 
+                  time-honored techniques with modern innovation to help you achieve that coveted glass skin glow.
+                </p>
+                <div className="grid md:grid-cols-3 gap-8 mt-12">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-[#0ABAB5]/10">
+                      <svg className="w-8 h-8 text-[#0ABAB5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Authentic K-Beauty</h3>
+                    <p className="text-gray-600">Traditional Korean skincare wisdom meets modern innovation</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-pink-400/10">
+                      <svg className="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Expert Care</h3>
+                    <p className="text-gray-600">Highly trained specialists dedicated to your skin journey</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-purple-400/10">
+                      <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Personalized Results</h3>
+                    <p className="text-gray-600">Customized treatments tailored to your unique skin needs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
 }

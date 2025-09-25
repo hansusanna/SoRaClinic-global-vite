@@ -1,0 +1,14 @@
+ [
+  { "pk": 4, "path": "/event/skin", "label": "스킨부스터 이벤트", "display": true},
+  { "pk": 5, "path": "/event/month", "label": "12월 이벤트", "display": true },
+  { "pk": 6, "path": "/event/first", "label": "첫방문 이벤트", "display": true },
+  { "pk": 7, "path": "/event/botox", "label": "보톡스", "display": true},
+  { "pk": 8, "path": "/event/anti", "label": "리프팅", "display": true },
+  { "pk": 9, "path": "/event/filler", "label": "필러&리프팅", "display": true },
+  { "pk": 10, "path": "/treatments/Skincare", "label": "Seasonal Skincare", "display": true},
+  { "pk": 11, "path": "/treatments/Ultherapy", "label": "울세라프라임", "display": true },
+  { "pk": 12, "path": "/treatments/CO2", "label": "Fractional CO2 Laser", "display": true },
+  { "pk": 13, "path": "/treatments/Acid", "label": "Hyaluronic Acid Fillers", "display": true},
+  { "pk": 14, "path": "/treatments/Peel", "label": "Chemical Peel", "display": true },
+  { "pk": 15, "path": "/treatments/Heroes", "label": "Hydration Heroes", "display": true }
+ ]
