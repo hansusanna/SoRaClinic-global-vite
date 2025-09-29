@@ -14,7 +14,7 @@ const Layout: React.FC = () => {
   const [bookingOpen, setBookingOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50">
       {/* 공통 레이아웃, 헤더 등 */}
       <Hd onOpenBooking={() => setBookingOpen(true)} />
       <div>

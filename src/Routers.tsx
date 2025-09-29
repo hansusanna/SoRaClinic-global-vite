@@ -9,6 +9,8 @@ import EventdetailPage from './components/pages/Eventdetail'
 import TreatmentsPage from './components/pages/Treatments'
 import AdminPage from './components/pages/Admin'
 import AdminLoginPage from './components/pages/AdminLogin'
+// 테일윈드 스타일가이드  
+import StyleGuide from './styles/StyleGuide'
 
 export default function Routers() {
   return (
@@ -23,6 +25,7 @@ export default function Routers() {
         <Route path="treatments" element={<TreatmentsPage />} />
         <Route path="admin" element={<AdminPage />} />
         <Route path="admin/login" element={<AdminLoginPage />} />
+        <Route path="/styleguide" element={<StyleGuide />} />
 
         {/* 404 */}
         <Route

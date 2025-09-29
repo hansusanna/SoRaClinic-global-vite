@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "The Ultimate K-Beauty Routine: 10 Steps to Glass Skin",
+    "excerpt": "Discover the secrets of Korean skincare with our comprehensive guide to achieving that coveted glass skin glow through traditional K-beauty methods.",
+    "image": "/images/product/product_img01.png",
+    "author": "Dr. Sora Kim",
+    "date": "December 20, 2025",
+    "category": "K-Beauty"
+  },
+  {
+    "id": 2,
+    "title": "Glass Skin vs. Dewy Skin: Understanding the Difference",
+    "excerpt": "Learn about the nuances between glass skin and dewy skin, and discover which Korean beauty trend is right for your skin type and goals.",
+    "image": "/images/product/product_img02.png",
+    "author": "Dr. Min-Jung Lee",
+    "date": "December 18, 2025",
+    "category": "Skincare Tips"
+  },
+  {
+    "id": 3,
+    "title": "Hydration Heroes: Best Korean Ingredients for Dry Skin",
+    "excerpt": "Explore the most effective Korean skincare ingredients for deep hydration, from hyaluronic acid to snail mucin and beyond.",
+    "image": "/images/product/product_img03.png",
+    "author": "Ji-Woo Park",
+    "date": "December 15, 2025",
+    "category": "Ingredients"
+  },
+  {
+    "id": 4,
+    "title": "Seasonal Skincare: Adapting Your K-Beauty Routine",
+    "excerpt": "Learn how to modify your Korean skincare routine throughout the year to maintain healthy, glowing skin in every season.",
+    "image": "/images/product/product_img04.png",
+    "author": "Hye-Jin Choi",
+    "date": "December 12, 2025",
+    "category": "Seasonal Care"
+  },
+  {
+    "id": 5,
+    "title": "The Science Behind K-Beauty: Why Korean Skincare Works",
+    "excerpt": "Dive deep into the scientific principles that make Korean skincare so effective, from ingredient innovation to layering techniques.",
+    "image": "/images/product/product_img05.png",
+    "author": "Dr. Sora Kim",
+    "date": "December 10, 2025",
+    "category": "Science"
+  },
+  {
+    "id": 6,
+    "title": "Anti-Aging with K-Beauty: Prproductive vs. Corrective Care",
+    "excerpt": "Understand the Korean approach to anti-aging skincare and learn how to prproduct signs of aging while treating existing concerns.",
+    "image": "/images/product/product_img06.png",
+    "author": "Dr. Min-Jung Lee",
+    "date": "December 8, 2025",
+    "category": "Anti-Aging"
+  }
+]

@@ -1,21 +1,24 @@
 import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
 
+const SAFE_LIST = [
+  'from-pink-50/80',
+  'to-rose-50/80',
+  'from-cyan-50/80',
+  'to-blue-50/80',
+  'from-yellow-50/80',
+  'to-amber-50/80',
+  'from-purple-50/80',
+  'to-pink-50/80',
+  'from-emerald-50/80',
+  'to-teal-50/80',
+  { pattern: /(bg|text|border)-(zinc|slate)-(50|100|200|300|400|500|600|700|800|900)/ },
+] satisfies NonNullable<Config['safelist']>
+
 const config: Config = {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
-  safelist: [
-    'from-pink-50/80',
-    'to-rose-50/80',
-    'from-cyan-50/80',
-    'to-blue-50/80',
-    'from-yellow-50/80',
-    'to-amber-50/80',
-    'from-purple-50/80',
-    'to-pink-50/80',
-    'from-emerald-50/80',
-    'to-teal-50/80',
-  ],
+  safelist: SAFE_LIST,
   theme: {
     container: { center: true, padding: '1rem' },
     extend: {

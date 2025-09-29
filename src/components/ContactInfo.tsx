@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { MapPin, Mail, Phone } from 'lucide-react'
-import { OPENING_HOURS, CONTACT_INFO } from './pages/contactData'
+import { OPENING_HOURS, CONTACT_INFO } from '../db/type/contactData'
 // import { Button } from './ui/button'
 // import { Input } from './ui/input'
 // import { Label } from './ui/label'

@@ -1,6 +1,7 @@
 import type { Doctor, TimelineItem } from "@/db/type/about";
 import doctorsData from "@/db/doctors.json";
 import timelineData from "@/db/timeline.json";
+import DoctorsSection from '@/components/DoctorSection'
 
 export default function About() {
   const doctors = doctorsData as Doctor[];
@@ -19,7 +20,7 @@ export default function About() {
               About <span className="text-[#0ABAB5]">SoRa</span>
               <span className="text-pink-400">Clinic</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We are passionate K-beauty experts dedicated to bringing you the authentic glass skin experience. 
               With years of expertise in Korean skincare traditions and a commitment to excellence, we make every treatment extraordinary.
             </p>
@@ -47,7 +48,7 @@ export default function About() {
                         <div className="p-6">
                           <h3 className="text-2xl text-[#0ABAB5] mb-2 font-bold">{item.year}</h3>
                           <h4 className="text-lg mb-3 text-gray-800 font-semibold">{item.title}</h4>
-                          <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                          <p className="text-gray-600 ">{item.description}</p>
                         </div>
                       </div>
                     </div>
@@ -61,26 +62,7 @@ export default function About() {
 
           {/* Doctors Section */}
           <section className="mb-[70px] mx-[30px]">
-            <h2 className="text-4xl text-center mb-12 text-gray-800">Meet Our Beauty Experts</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {doctors.map((member, index) => (
-                <div key={`${member.name}-${index}`} className="text-center group">
-                  <div className="relative mb-6 overflow-hidden rounded-full w-48 h-48 mx-auto border-4 border-pink-100 transition-all duration-300 group-hover:border-[#0ABAB5]">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = "/img/placeholder-avatar.png";
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0ABAB5]/20 to-pink-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </div>
-                  <h3 className="text-xl mb-1 text-gray-800 font-semibold">{member.name}</h3>
-                  <p className="text-[#0ABAB5] font-medium">{member.role}</p>
-                </div>
-              ))}
-            </div>
+            <DoctorsSection doctors={doctors} />
           </section>
 
           {/* Mission Section */}
@@ -88,7 +70,7 @@ export default function About() {
             <div className="rounded-3xl p-12 border bg-gradient-to-br from-pink-50/80 via-white to-purple-50/60">
               <div className="text-center">
                 <h2 className="text-4xl mb-8 text-gray-800">Our Mission</h2>
-                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto ">
                   At SoRa Clinic, we believe that everyone deserves to achieve their dream skin. Our mission is to bring the authentic K-beauty 
                   experience to you through personalized treatments, expert care, and the finest Korean skincare traditions. We combine 
                   time-honored techniques with modern innovation to help you achieve that coveted glass skin glow.

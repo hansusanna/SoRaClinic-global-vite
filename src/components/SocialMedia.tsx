@@ -1,5 +1,5 @@
 import { Instagram, Facebook, Twitter, Youtube } from 'lucide-react'
-import { SOCIAL_LINKS } from './pages/contactData'
+import { SOCIAL_LINKS } from '../db/type/contactData'
 
 const SOCIAL_ICONS = {
   Instagram,

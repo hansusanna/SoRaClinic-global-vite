@@ -20,9 +20,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#0ABAB5]/30 to-transparent"></div>
+      
     </footer>
   );
 }

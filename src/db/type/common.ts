@@ -4,6 +4,7 @@ export interface NaviItem {
   path: string;          // 라우트 경로
   label: string;         // 메뉴 이름
   display: boolean;      // 화면 표시 여부
+  scrollToId?: string;
 }
 
 export interface FooterLink {

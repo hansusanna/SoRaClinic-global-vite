@@ -2,6 +2,6 @@
   { "pk": 0, "path": "/event", "label": "EVENTS", "display": true },
   { "pk": 1, "path": "/about", "label": "ABOUT", "display": true },
   { "pk": 2, "path": "/treatments", "label": "TREATMENTS", "display": true },
-  { "pk": 3, "path": "/contact", "label": "CONTACT", "display": true }
+  { "pk": 3, "path": "/contact", "label": "CONTACT", "display": true, "scrollToId": "contacts" }
 
 ]
