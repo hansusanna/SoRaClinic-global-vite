@@ -33,7 +33,7 @@ export default function Treatments() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-8">
+    <div className="mx-auto max-w-7xl py-8">
       {/* 헤더 */}
       <div className="mb-12 text-center">
         <h1 className="mb-6 text-5xl text-slate-800">Treatments</h1>

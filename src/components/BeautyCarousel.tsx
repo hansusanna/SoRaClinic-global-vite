@@ -57,7 +57,7 @@ export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouse
   }
 
   return (
-    <div className="relative flex items-center justify-center min-h-[calc(100vh-120px)] pt-5 pb-20">
+    <div className="relative flex items-center justify-center min-h-[calc(100vh-120px)] pb-10">
       {/* Elegant Navigation Arrows */}
       <button
         onClick={prevSlide} className="absolute left-4 md:left-12 z-40 group hidden md:block" aria-label="Previous slide">

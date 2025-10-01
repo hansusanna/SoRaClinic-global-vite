@@ -61,7 +61,7 @@ export default function Event() {
   };
 
   return (
-    <div className="max-w-7xl px-6 py-8 mx-auto">
+    <div className="max-w-7xl mx-auto">
       {/* 이벤트 타이틀 */}
       <div className="text-center mb-12">
         <h1 className="text-5xl mb-6 text-gray-800">Special Promotions</h1>

@@ -8,11 +8,9 @@ export default function About() {
   const timeline = timelineData as TimelineItem[];
 
   return (
-    <div className="relative min-h-screen pt-5">
-      {/* 배경 그라디언트 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 to-orange-50/20" />
+    <div className="relative min-h-screen">
       {/* 컨텐츠 래퍼 */}
-      <div className="relative z-20 m-[30px] p-5">
+      <div className="relative z-20 p-5">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10">
@@ -67,16 +65,16 @@ export default function About() {
 
           {/* Mission Section */}
           <section>
-            <div className="rounded-3xl p-12 border bg-gradient-to-br from-pink-50/80 via-white to-purple-50/60">
+            <div className="rounded-2xl p-12 border-2 border-slate-200">
               <div className="text-center">
                 <h2 className="text-4xl mb-8 text-gray-800">Our Mission</h2>
-                <p className="text-xl text-gray-600 max-w-4xl mx-auto ">
+                <p className="text-xl text-gray-500 max-w-4xl mx-auto ">
                   At SoRa Clinic, we believe that everyone deserves to achieve their dream skin. Our mission is to bring the authentic K-beauty 
                   experience to you through personalized treatments, expert care, and the finest Korean skincare traditions. We combine 
                   time-honored techniques with modern innovation to help you achieve that coveted glass skin glow.
                 </p>
                 <div className="grid md:grid-cols-3 gap-8 mt-12">
-                  <div className="text-center">
+                  <div className="text-center bg-gray-100 p-3 rounded-2xl">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-[#0ABAB5]/10">
                       <svg className="w-8 h-8 text-[#0ABAB5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -85,7 +83,7 @@ export default function About() {
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">Authentic K-Beauty</h3>
                     <p className="text-gray-600">Traditional Korean skincare wisdom meets modern innovation</p>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center bg-gray-100 p-3 rounded-2xl">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-pink-400/10">
                       <svg className="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -94,7 +92,7 @@ export default function About() {
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">Expert Care</h3>
                     <p className="text-gray-600">Highly trained specialists dedicated to your skin journey</p>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center bg-gray-100 p-3 rounded-2xl">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-purple-400/10">
                       <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />

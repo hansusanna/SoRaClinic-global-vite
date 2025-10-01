@@ -5,7 +5,6 @@ import Layout from './Layout'
 import HomePage from './components/pages/Home'
 import AboutPage from './components/pages/About'
 import EventPage from './components/pages/Event'
-import EventdetailPage from './components/pages/Eventdetail'
 import TreatmentsPage from './components/pages/Treatments'
 import AdminPage from './components/pages/Admin'
 import AdminLoginPage from './components/pages/AdminLogin'
@@ -21,7 +20,6 @@ export default function Routers() {
         <Route index element={<HomePage />} />
         <Route path="about/:content?" element={<AboutPage />} />
         <Route path="event/:category_id?" element={<EventPage />} />
-        <Route path="event/:pk" element={<EventdetailPage />} />
         <Route path="treatments" element={<TreatmentsPage />} />
         <Route path="admin" element={<AdminPage />} />
         <Route path="admin/login" element={<AdminLoginPage />} />
