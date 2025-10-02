@@ -63,7 +63,7 @@ export default function Event() {
   return (
     <div className="max-w-7xl mx-auto">
       {/* 이벤트 타이틀 */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 p-5">
         <h1 className="text-5xl mb-6 text-gray-800">Special Promotions</h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Exclusive K-beauty offers for international clients at SoRa Clinic.
@@ -192,11 +192,8 @@ export default function Event() {
           </div>
         </div>
 
-        <button
-          onClick={() => setSelectedItem(null)}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-white/90 backdrop-blur-sm rounded-full p-1.5 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-          aria-label="Close modal"
-        >
+        <button onClick={() => setSelectedItem(null)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-white/90 backdrop-blur-sm rounded-full p-1.5 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110" aria-label="Close modal">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
