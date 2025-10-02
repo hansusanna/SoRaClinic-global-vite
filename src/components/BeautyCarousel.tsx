@@ -1,38 +1,55 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { Slide } from '@/db/type/slide'
-import slidesKo from '@/db/slides/slides.ko.json'
-import slidesEn from '@/db/slides/slides.en.json'
-import slidesCn from '@/db/slides/slides.cn.json'
 import BeautySlideCard from '@/components/BeautySlideCard'
+import { mapLang } from '@/i18n/pageLoader' 
+type JsonMod<T> = { default: T }
 
-
-const locale = 'ko' // 실제로는 i18n 상태값 등으로 제어
-
-const slidesMap: Record<string, Slide[]> = {
-  ko: slidesKo as Slide[],
-  en: slidesEn as Slide[],
-  cn: slidesCn as Slide[],
-}
-
-const slides = slidesMap[locale];
 interface BeautyCarouselProps {
   onNavigateToTreatments: () => void
 }
 
 export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouselProps) {
+  const { i18n } = useTranslation()
+  const [slides, setSlides] = useState<Slide[]>([])
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  const nextSlide = () => setCurrentSlide((p) => (p + 1) % slides.length)
-  const prevSlide = () => setCurrentSlide((p) => (p - 1 + slides.length) % slides.length)
-  const goToSlide = (i: number) => setCurrentSlide(i)
+  // 언어별 slides.json 로드 (+ 폴백)
+  useEffect(() => {
+    let alive = true
+    ;(async () => {
+      const lang = mapLang(i18n.language)
+      try {
+        const mod = await (import(`@/locales/${lang}/pages/slides.json`) as Promise<JsonMod<Slide[]>>)
+        if (!alive) return
+        setSlides(mod.default)
+      } catch {
+        // 폴백: 필요 시 DB 정적 파일 중 하나로
+        const fallback = await (import('@/db/slides/slides.en.json') as Promise<JsonMod<Slide[]>>)
+        if (!alive) return
+        setSlides(fallback.default)
+      }
+    })()
+    return () => { alive = false }
+  }, [i18n.language])
 
   useEffect(() => {
+    if (currentSlide >= slides.length) setCurrentSlide(0)
+  }, [slides.length, currentSlide])
+
+  const nextSlide = () => setCurrentSlide(p => (p + 1) % (slides.length || 1))
+  const prevSlide = () => setCurrentSlide(p => (p - 1 + (slides.length || 1)) % (slides.length || 1))
+  const goToSlide = (i: number) => setCurrentSlide(i)
+
+  // 자동 재생 (슬라이드 개수 바뀌면 타이머 재설정)
+  useEffect(() => {
+    if (!slides.length) return
     const timer = setInterval(nextSlide, 6000)
     return () => clearInterval(timer)
-  }, [])
-
+  }, [slides.length])
 
   const getCardPosition = (index: number) => {
+    if (!slides.length) return { display: 'none' as const }
     const diff = index - currentSlide
     const total = slides.length
     let normalized = diff
@@ -40,7 +57,7 @@ export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouse
 
     const isCenter = normalized === 0
     const isVisible = Math.abs(normalized) <= 2
-    if (!isVisible) return { display: 'none' }
+    if (!isVisible) return { display: 'none' as const }
 
     const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false
     const translateX = normalized * (isMobile ? 330 : 530)
@@ -58,45 +75,33 @@ export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouse
 
   return (
     <div className="relative flex items-center justify-center min-h-[calc(100vh-120px)] pb-10">
-      {/* Elegant Navigation Arrows */}
+      {/* Prev */}
       <button
-        onClick={prevSlide} className="absolute left-4 md:left-12 z-40 group hidden md:block" aria-label="Previous slide">
+        onClick={prevSlide}
+        className="absolute left-4 md:left-12 z-40 group hidden md:block"
+        aria-label="Previous slide"
+      >
         <div className="bg-white/90 backdrop-blur-sm w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-gray-700 md:hover:text-pink-500 md:hover:bg-white transition-all duration-300 shadow-lg md:group-hover:shadow-xl border border-pink-100/50">
-          <svg
-            className="w-5 h-5 md:w-6 md:h-6 md:group-hover:scale-110 transition-transform duration-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
+          <svg className="w-5 h-5 md:w-6 md:h-6 md:group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </div>
       </button>
 
+      {/* Next */}
       <button
-        onClick={nextSlide} className="absolute right-4 md:right-12 z-40 group hidden md:block" aria-label="Next slide">
+        onClick={nextSlide}
+        className="absolute right-4 md:right-12 z-40 group hidden md:block"
+        aria-label="Next slide"
+      >
         <div className="bg-white/90 backdrop-blur-sm w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-gray-700 md:hover:text-pink-500 md:hover:bg-white transition-all duration-300 shadow-lg md:group-hover:shadow-xl border border-pink-100/50">
-          <svg
-            className="w-5 h-5 md:w-6 md:h-6 md:group-hover:scale-110 transition-transform duration-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
+          <svg className="w-5 h-5 md:w-6 md:h-6 md:group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </div>
       </button>
-      {/* Carousel Cards */}
+
+      {/* Carousel */}
       <div className="relative w-full max-w-[90rem] mx-auto px-4 md:px-8">
         <div className="relative h-[500px] md:h-[750px] flex items-center justify-center">
           {slides.map((slide, index) => {
@@ -115,7 +120,8 @@ export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouse
           })}
         </div>
       </div>
-      {/* Elegant Pagination Dots */}
+
+      {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
         <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-pink-200/30">
           <div className="flex space-x-3">

@@ -1,15 +1,28 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import navi from '@/db/navi.json'
-import type { NaviItem } from '@/db/type/common'
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { loadNavByLang, type NavItem } from '@/i18n/navLoader'
 
 export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
   const [open, setOpen] = useState(false)
-  const items = useMemo(() => (navi as NaviItem[]).filter(i => i.display), [])
+  const [items, setItems] = useState<NavItem[]>([])
   const navigate = useNavigate()
   const location = useLocation()
+  const { i18n } = useTranslation()
+
+  // 언어 변경 시 네비게이션 로드
+  useEffect(() => {
+    let alive = true
+    loadNavByLang(i18n.language).then((data) => {
+      if (!alive) return
+      setItems(data.filter((i) => i.display))
+    })
+    return () => {
+      alive = false
+    }
+  }, [i18n.language])
 
   // 홈(/) + #id 일치하면 활성
   const isHashActive = (id: string) =>
@@ -70,11 +83,13 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
             )
           )}
         </nav>
+
         <div className="flex items-center gap-2">
           {/* 데스크탑 BOOK 버튼 */}
           <Button onClick={onOpenBooking} variant="gradient" size="lg" className="rounded-full hidden md:inline-flex">
             BOOK
           </Button>
+
           {/* 모바일 메뉴 */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -100,7 +115,8 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
                     <button
                       key={item.pk}
                       onClick={() => go(item.scrollToId!)}
-                      className="text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 text-gray-600 hover:text-pink-500 hover:bg-white">
+                      className="text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 text-gray-600 hover:text-pink-500 hover:bg-white"
+                    >
                       {item.label}
                     </button>
                   ) : (
@@ -115,14 +131,15 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
                             ? 'bg-white text-[#0ABAB5] border-l-4 border-[#0ABAB5]'
                             : 'text-gray-600 hover:text-pink-500 hover:bg-white'
                         }`
-                      }>
+                      }
+                    >
                       {item.label}
                     </NavLink>
                   )
                 )}
               </nav>
 
-              {/* 모바일 BOOK 버튼 (모바일에서 보여야 하므로 w-full만) */}
+              {/* 모바일 BOOK 버튼 */}
               <div className="pt-6 border-t border-pink-100">
                 <Button
                   onClick={() => {
@@ -131,7 +148,8 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
                   }}
                   variant="gradient"
                   size="lg"
-                  className="w-full rounded-full">
+                  className="w-full rounded-full"
+                >
                   BOOK
                 </Button>
               </div>

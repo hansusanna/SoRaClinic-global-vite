@@ -1,0 +1,20 @@
+{
+  "treatments": {
+    "title": "Treatments",
+    "subtitle": "Expert K-beauty treatments, skincare solutions, and professional services from our SoRa Clinic specialists"
+  },
+  "event": {
+    "title": "Special Promotions",
+    "subtitle": "Exclusive K-beauty offers for international clients at SoRa Clinic. Experience premium Korean beauty treatments with special discounted rates.",
+    "limited": "Limited Time Offers - Book Your Beauty Transformation Now!",
+    "expired": "Expired",
+    "included": "What's Included:"
+  },
+  "buttons": {
+    "bookThis": "Book This",
+    "askQuestions": "Ask Questions",
+    "readArticle": "Read Article",
+    "close": "Close",
+    "learnMore": "Learn More"
+  }
+}

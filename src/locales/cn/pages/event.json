@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "激光脱毛套餐",
+    "category": "激光治疗",
+    "discount": "优惠 40%",
+    "originalPrice": "$800",
+    "eventPrice": "$480",
+    "validUntil": "有效期至 2026 年 3 月 31 日",
+    "image": "/images/event/event_img01.png",
+    "description": "面向国际顾客的全身激光脱毛套餐。高端 IPL 技术，打造光滑细致的肌肤效果。",
+    "includes": ["全身 6 次疗程", "免费咨询", "术后护理产品", "提供英语服务工作人员"]
+  },
+  {
+    "id": 2,
+    "title": "肉毒抗衰疗程",
+    "category": "注射类",
+    "discount": "优惠 30%",
+    "originalPrice": "$600",
+    "eventPrice": "$420",
+    "validUntil": "有效期至 2026 年 4 月 15 日",
+    "image": "/images/event/event_img02.png",
+    "description": "专业肉毒素治疗，塑造年轻无纹的肌肤。使用 FDA 认证产品，由经验丰富的韩国医师操作。",
+    "includes": ["额头 + 眼周 + 川字纹", "术后护理", "2 周随访", "国际认证"]
+  },
+  {
+    "id": 3,
+    "title": "玻尿酸填充提升",
+    "category": "注射类",
+    "discount": "优惠 25%",
+    "originalPrice": "$900",
+    "eventPrice": "$675",
+    "validUntil": "有效期至 2026 年 3 月 20 日",
+    "image": "/images/event/event_img03.png",
+    "description": "高端玻尿酸填充，改善面部轮廓与体积，呈现自然的韩系美感效果。",
+    "includes": ["高端填充剂 1ml", "面部映射分析", "表麻膏", "紧急联系人支持"]
+  },
+  {
+    "id": 4,
+    "title": "玻璃肌面部套餐",
+    "category": "面部护理",
+    "discount": "优惠 35%",
+    "originalPrice": "$400",
+    "eventPrice": "$260",
+    "validUntil": "有效期至 2025 年 4 月 30 日",
+    "image": "/images/event/event_img04.png",
+    "description": "以深层补水为核心的招牌面部护理，帮助打造如瓷般通透的“玻璃肌”。",
+    "includes": ["3 次疗程", "韩国护肤产品", "居家护理套装", "皮肤分析报告"]
+  },
+  {
+    "id": 5,
+    "title": "K-Beauty 焕亮疗程",
+    "category": "美白焕亮",
+    "discount": "优惠 50%",
+    "originalPrice": "$1200",
+    "eventPrice": "$600",
+    "validUntil": "有效期至 2026 年 5 月 15 日",
+    "image": "/images/event/event_img05.png",
+    "description": "结合 LED 光疗、维 C 注入与韩国焕亮技术的综合性焕肤方案，提升通透光泽感。",
+    "includes": ["6 个月治疗计划", "LED 光疗", "维生素 C 精华", "每周监测"]
+  },
+  {
+    "id": 6,
+    "title": "尊享护肤方案",
+    "category": "护肤",
+    "discount": "优惠 45%",
+    "originalPrice": "$1500",
+    "eventPrice": "$825",
+    "validUntil": "有效期至 2025 年 3 月 25 日",
+    "image": "/images/event/event_img06.png",
+    "description": "多项高端疗程组合的一体化护理，全面改善肌肤并兼顾抗老需求。",
+    "includes": ["微针 + PRP", "化学换肤", "维 C 注入", "3 个月护肤套组"]
+  },
+  {
+    "id": 7,
+    "title": "深润补水提升",
+    "category": "补水护理",
+    "discount": "优惠 30%",
+    "originalPrice": "$350",
+    "eventPrice": "$245",
+    "validUntil": "有效期至 2026 年 4 月 10 日",
+    "image": "/images/event/event_img07.png",
+    "description": "运用韩系护肤秘诀，为肌肤深层补水，呈现饱满水润、由内而外的自然光泽。",
+    "includes": ["透明质酸疗法", "胶原蛋白面膜", "修复护理产品", "复诊咨询"]
+  },
+  {
+    "id": 8,
+    "title": "奢华面膜疗法特惠",
+    "category": "面膜疗法",
+    "discount": "优惠 40%",
+    "originalPrice": "$500",
+    "eventPrice": "$300",
+    "validUntil": "有效期至 2026 年 3 月 28 日",
+    "image": "/images/event/event_img08.png",
+    "description": "采用高端韩国成分的奢华面膜疗法，强化修复，促进肌肤焕新。",
+    "includes": ["专业面膜", "精华导入", "修复疗程", "术后护理指引"]
+  },
+  {
+    "id": 9,
+    "title": "美肤咨询套餐",
+    "category": "咨询",
+    "discount": "免费",
+    "originalPrice": "$150",
+    "eventPrice": "$0",
+    "validUntil": "每日可用",
+    "image": "/images/event/event_img09.png",
+    "description": "与韩国美学专家团队进行全面咨询，制定专属美肤提升方案。",
+    "includes": ["详细皮肤分析", "治疗计划", "产品推荐", "多语言支持"]
+  },
+  {
+    "id": 10,
+    "title": "K-Beauty 焕亮疗程",
+    "category": "美白焕亮",
+    "discount": "优惠 50%",
+    "originalPrice": "$1200",
+    "eventPrice": "$600",
+    "validUntil": "有效期至 2026 年 5 月 15 日",
+    "image": "/images/event/event_img10.png",
+    "description": "结合 LED 光疗、维 C 注入与韩国焕亮技术的综合性焕肤方案，提升通透光泽感。",
+    "includes": ["6 个月治疗计划", "LED 光疗", "维生素 C 精华", "每周监测"]
+  }
+]

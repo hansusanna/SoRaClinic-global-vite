@@ -1,76 +1,110 @@
-import { useMemo, useState, useEffect } from "react";
-import type { EventItem } from "@/db/type/event";
-import EventCard from "@/components/EventCard";
-import raw from "@/db/event.json";
-import { Button } from "@/components/ui/button"; 
+import { useMemo, useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
+import type { EventItem } from "@/db/type/event"
+import EventCard from "@/components/EventCard"
+import { Button } from "@/components/ui/button"
+import { mapLang } from "@/i18n/pageLoader"
+
+type JsonMod<T> = { default: T }
 
 export default function Event() {
-  const [selectedItem, setSelectedItem] = useState<EventItem | null>(null);
-  const [clickedCard, setClickedCard] = useState<number | null>(null);
+  const { t } = useTranslation('common')
+  const { i18n } = useTranslation()
+  const [items, setItems] = useState<EventItem[]>([])
+  const [selectedItem, setSelectedItem] = useState<EventItem | null>(null)
+  const [clickedCard, setClickedCard] = useState<number | null>(null)
 
+  // 언어별 이벤트 JSON 로드 (+ 폴백)
   useEffect(() => {
-  if (!selectedItem) return;
+    let alive = true
+    ;(async () => {
+      const lang = mapLang(i18n.language)
+      try {
+        const mod = await (import(`@/locales/${lang}/pages/event.json`) as Promise<JsonMod<EventItem[]>>)
+        if (!alive) return
+        setItems(mod.default)
+      } catch {
+        // 폴백: 기본 db 파일
+        const mod = await (import("@/db/event.json") as Promise<JsonMod<EventItem[]>>)
+        if (!alive) return
+        setItems(mod.default)
+      }
+    })()
+    return () => { alive = false }
+  }, [i18n.language])
 
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === "Escape") setSelectedItem(null);
-  };
-  document.addEventListener("keydown", onKey);
+  // 모달 ESC/스크롤 락
+  useEffect(() => {
+    if (!selectedItem) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedItem(null) }
+    document.addEventListener("keydown", onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = prev
+    }
+  }, [selectedItem])
 
-  const prev = document.body.style.overflow;
-  document.body.style.overflow = "hidden";
-
-  return () => {
-    document.removeEventListener("keydown", onKey);
-    document.body.style.overflow = prev;
-  };
-}, [selectedItem]);
-
-  const items = raw as EventItem[];
+  // 다국어 validUntil 파싱
+  const parseValidUntil = (txt: string): Date | null => {
+    // 무기한
+    if (/available\s*daily/i.test(txt) || /매일\s*이용\s*가능/.test(txt) || /每日\s*可用/.test(txt)) {
+      return new Date(8640000000000000) 
+    }
+    // EN
+    const en = txt.match(/until\s+(.+)$/i)
+    if (en) {
+      const d = new Date(en[1])
+      if (!isNaN(d.getTime())) return d
+    }
+    // KO
+    const ko = txt.match(/(\d{4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일/)
+    if (ko) {
+      const [, y, m, day] = ko
+      return new Date(Number(y), Number(m) - 1, Number(day))
+    }
+    // CN
+    const cn = txt.match(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/)
+    if (cn) {
+      const [, y, m, day] = cn
+      return new Date(Number(y), Number(m) - 1, Number(day))
+    }
+    return null // 파싱 실패
+  }
 
   // 만료/활성 분류
   const { activeItems, expiredItems } = useMemo(() => {
-    const today = new Date();
-
-    const parseValidUntil = (txt: string): Date | null => {
-      if (/available daily/i.test(txt)) return new Date(8640000000000000); // 무기한
-      const m = txt.match(/until\s+(.+)$/i);
-      if (!m) return null;
-      const d = new Date(m[1]);
-      return isNaN(d.getTime()) ? null : d;
-    };
-
-    const active: EventItem[] = [];
-    const expired: EventItem[] = [];
-
+    const today = new Date()
+    const active: EventItem[] = []
+    const expired: EventItem[] = []
     for (const it of items) {
-      const d = parseValidUntil(it.validUntil);
-      if (!d) active.push(it);
-      else (d >= today ? active : expired).push(it);
+      const d = parseValidUntil(it.validUntil)
+      if (!d) active.push(it)
+      else (d >= today ? active : expired).push(it)
     }
-    return { activeItems: active, expiredItems: expired };
-  }, [items]);
+    return { activeItems: active, expiredItems: expired }
+  }, [items])
 
   const handleCardClick = (id: number) => {
-    setClickedCard(id);
-    const picked = items.find((i) => i.id === id) ?? null;
-
+    setClickedCard(id)
+    const picked = items.find((i) => i.id === id) ?? null
     setTimeout(() => {
-      setClickedCard(null);
-      setSelectedItem(picked);
-    }, 200);
-  };
+      setClickedCard(null)
+      setSelectedItem(picked)
+    }, 200)
+  }
 
   return (
     <div className="max-w-7xl mx-auto">
       {/* 이벤트 타이틀 */}
       <div className="text-center mb-12 p-5">
-        <h1 className="text-5xl mb-6 text-gray-800">Special Promotions</h1>
+        <h1 className="text-5xl mb-6 text-gray-800">{t('event.title')}</h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Exclusive K-beauty offers for international clients at SoRa Clinic.
-          Experience premium Korean beauty treatments with special discounted rates.
+           {t('event.subtitle')}
         </p>
         <div className="mt-6 inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-medium">
-        Limited Time Offers - Book Your Beauty Transformation Now!
+        {t('event.limited')}
         </div>
       </div>
 
@@ -89,7 +123,7 @@ export default function Event() {
       {/* Expired 이벤트 끝났을때 */}
       {expiredItems.length > 0 && (
         <section className="mt-16">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Expired</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">{t('event.expired')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-60">
             {expiredItems.map((item) => (
               <EventCard
@@ -170,7 +204,7 @@ export default function Event() {
             </p>
 
             <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-gray-800">What's Included:</h4>
+              <h4 className="text-sm font-semibold text-gray-800">{t('event.included')}</h4>
               <div className="grid grid-cols-1 gap-1">
                 {selectedItem.includes.map((include, index) => (
                   <div key={index} className="flex items-center gap-2">
@@ -183,10 +217,10 @@ export default function Event() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button className="bg-gradient-to-r from-[#0ABAB5] to-pink-400 hover:from-[#0ABAB5]/90 hover:to-pink-400/90 text-white px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex-1 text-sm">
-                Book This
+               {t('buttons.bookThis')}
               </Button>
               <Button variant="outline" className="border-pink-200 text-pink-600 hover:bg-pink-50 px-4 py-2 rounded-full transition-all duration-300 text-sm">
-                Ask Questions
+                {t('buttons.askQuestions')}
               </Button>
             </div>
           </div>

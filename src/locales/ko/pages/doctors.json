@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Dr. Sora Kim",
+    "role": "설립자 / 대표원장",
+    "image": "/images/doctor/doctor1.png"
+  },
+  {
+    "name": "Dr. Min-Jung Lee",
+    "role": "피부과 전문의",
+    "image": "/images/doctor/doctor2.png"
+  },
+  {
+    "name": "Ji-Woo Park",
+    "role": "피부과 전문의",
+    "image": "/images/doctor/doctor3.png"
+  },
+  {
+    "name": "Hye-Jin Choi",
+    "role": "피부 컨설턴트",
+    "image": "/images/doctor/doctor4.png"
+  }
+]

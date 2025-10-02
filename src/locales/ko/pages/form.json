@@ -1,0 +1,15 @@
+[
+  { "id": "name", "label": "성명 *", "type": "text", "required": true, "section": "personal" },
+  { "id": "email", "label": "이메일 주소 *", "type": "email", "required": true, "section": "personal" },
+  { "id": "phone", "label": "연락처(전화번호) *", "type": "tel", "required": true, "section": "personal" },
+
+  { "id": "treatmentType", "label": "희망 시술 *", "type": "select", "optionsKey": "treatmentTypes", "required": true, "section": "appointment" },
+  { "id": "appointmentDate", "label": "희망 날짜", "type": "date", "section": "appointment" },
+  { "id": "timeSlot", "label": "희망 시간", "type": "select", "optionsKey": "timeSlots", "section": "appointment" },
+
+  { "id": "skinType", "label": "피부 타입", "type": "select", "optionsKey": "skinTypes", "section": "assessment" },
+  { "id": "skinConcerns", "label": "주요 피부 고민", "type": "select", "optionsKey": "skinConcernOptions", "section": "assessment" },
+  { "id": "previousTreatments", "label": "이전 시술/관리 이력", "type": "textarea", "section": "assessment" },
+  { "id": "allergies", "label": "알레르기/민감 항목", "type": "textarea", "section": "assessment" },
+  { "id": "message", "label": "고객 목표/메모", "type": "textarea", "section": "assessment" }
+]
