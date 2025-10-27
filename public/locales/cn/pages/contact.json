@@ -1,0 +1,20 @@
+{
+  "openingHoursTitle": "开头小时",
+  "openingHours": [
+    { "days": "周一至周五", "hours": "上午 10:00 – 晚上 8:00" },
+    { "days": "周六", "hours": "上午 10:00 – 下午 3:00" }
+  ],
+  "contactInfo": {
+    "address": "韩国首尔市江南区123大厦6层",
+    "email": "info@soraclinic.com",
+    "phone": "(+82) 555-5555",
+    "visitMessage": "请在预约好合适时间后前来就诊。"
+  },
+  "socialLinks": [
+    { "name": "Instagram", "href": "#" },
+    { "name": "Facebook", "href": "#" },
+    { "name": "Twitter", "href": "#" },
+    { "name": "Youtube", "href": "#" },
+    { "name": "WeChat", "href": "#" }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "treatments": {
+    "title": "疗程介绍",
+    "subtitle": "由 Sora Clinic 专家提供的专业 K-Beauty 疗程、护肤方案与专科服务。"
+  },
+  "event": {
+    "title": "特别优惠",
+    "subtitle": "Sora Clinic 面向海外客户的专属 K-Beauty 礼遇。以优惠价格体验韩国高端美容疗程。",
+    "limited": "限时优惠——立即预约，开启你的美丽！",
+    "expired": "已结束的活动",
+    "included": "包含内容：",
+    "more": "+{{count}} 项更多"
+  },
+  "buttons": {
+    "bookNow": "立即预约",
+    "bookThis": "预约此疗程",
+    "askQuestions": "咨询",
+    "close": "关闭",
+    "readMore": "了解更多"
+  },
+  "footer": {
+    "description": "以尖端技术与专业实力，助你提升美丽的高端 K-Beauty 诊所。",
+    "quickLinks": {
+      "title": "快捷链接",
+      "home": "首页",
+      "events": "优惠活动"
+    },
+    "contact": {
+      "title": "联系方式",
+      "address": "韩国 首尔市 江南区",
+      "phone": "+82 2-1234-5678",
+      "email": "contact@soraclinic.com"
+    },
+    "rights": "版权所有。"
+  }
+}

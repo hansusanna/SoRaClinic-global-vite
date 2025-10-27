@@ -1,0 +1,32 @@
+{
+  "title": "Book Your SoRa Experience",
+  "description": "Begin your journey to radiant, glass-like skin with our expert beauty specialists. Fill out the form below to schedule your personalized consultation and treatment plan.",
+  "fields": {
+    "name": { "label": "Full Name *", "placeholder": "Enter your full name" , "required": true },
+    "email": { "label": "Email Address *", "placeholder": "your.email@example.com" , "required": true },
+    "phone": { "label": "Phone Number *", "placeholder": "+1 (555) 123-4567" , "required": true },
+    "treatmentType": { "label": "Preferred Treatment *", "placeholder": "Select your desired treatment" , "required": true },
+    "appointmentDate": { "label": "Preferred Date", "placeholder": "Select date" , "required": true },
+    "timeSlot": { "label": "Preferred Time", "placeholder": "Select time slot" , "required": true },
+    "skinType": { "label": "Skin Type", "placeholder": "Select your skin type" , "required": true },
+    "skinConcerns": { "label": "Primary Skin Concerns", "placeholder": "Select your main concern" , "required": true },
+    "previousTreatments": { "label": "Previous Beauty Treatments", "placeholder": "List any previous facial treatments." , "required": true },
+    "allergies": { "label": "Allergies & Sensitivities", "placeholder": "Please list any known allergies." , "required": true },
+    "message": { "label": "Beauty Goals & Notes", "placeholder": "Tell us about your goals or questions." , "required": true }
+  },
+  "sections": {
+    "personal": "Personal Information",
+    "appointment": "Appointment Details",
+    "assessment": "Beauty Assessment"
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "submit": "Book Appointment",
+    "submitting": "Booking."
+  },
+  "toast": {
+    "missingFields": "Please fill in all required fields.",
+    "success": "Booking submitted successfully! Our team will contact you within 24 hours.",
+    "error": "Failed to submit booking. Please try again."
+  }
+}

@@ -1,20 +1,38 @@
 {
   "treatments": {
-    "title": "Treatments",
-    "subtitle": "Expert K-beauty treatments, skincare solutions, and professional services from our SoRa Clinic specialists"
+    "title": "시술 안내",
+    "subtitle": "소라 클리닉 전문가가 제공하는 전문 K-뷰티 시술, 스킨케어 솔루션 및 전문 서비스"
   },
   "event": {
-    "title": "Special Promotions",
-    "subtitle": "Exclusive K-beauty offers for international clients at SoRa Clinic. Experience premium Korean beauty treatments with special discounted rates.",
-    "limited": "Limited Time Offers - Book Your Beauty Transformation Now!",
-    "expired": "Expired",
-    "included": "What's Included:"
+    "title": "스페셜 프로모션",
+    "subtitle": "소라 클리닉에서 해외 고객을 위한 특별 K-뷰티 혜택. 프리미엄 한국 뷰티 시술을 특별 할인가로 경험하세요.",
+    "limited": "기간 한정 혜택 - 지금 바로 당신의 뷰티를 예약하세요!",
+    "expired": "종료된 이벤트",
+    "included": "포함 내역:",
+    "more": "+{{count}}개 더보기"
   },
   "buttons": {
-    "bookThis": "Book This",
-    "askQuestions": "Ask Questions",
-    "readArticle": "Read Article",
-    "close": "Close",
-    "learnMore": "Learn More"
+    "bookNow": "지금 예약",
+    "bookThis": "이 시술 예약",
+    "askQuestions": "질문하기",
+    "readArticle": "기사 읽기",
+    "close": "닫기",
+    "learnMore": "더 알아보기"
+  },
+  "footer": {
+    "description": "최첨단 기술과 전문성을 바탕으로 당신의 아름다움을 한 단계 끌어올리는 프리미엄 K-뷰티 클리닉입니다.",
+    "quickLinks": {
+      "title": "바로가기",
+      "home": "홈",
+      "events": "이벤트"
+    },
+    "contact": {
+      "title": "연락처",
+      "address": "서울시 강남구, 대한민국",
+      "phone": "+82 2-1234-5678",
+      "email": "contact@soraclinic.com"
+    },
+    "rights": "All rights reserved."
   }
 }
+

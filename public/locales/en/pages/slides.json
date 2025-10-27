@@ -1,20 +1,21 @@
-[
+{
+  "slides": [
   {
     "id": 1,
-    "title": "글래스 스킨 트리트먼트",
-    "subtitle": "소라 시그니처",
-    "description": "빛나는 유리 피부를 위한 소라의 시그니처 뷰티 시술을 경험해보세요. 맑고 투명하게 빛나는 피부를 선사합니다.",
+    "title": "GLASS SKIN TREATMENT",
+    "subtitle": "SORA SIGNATURE",
+    "description": "Achieve that coveted glass skin glow with our signature SoRa beauty treatments. Experience radiant, translucent skin that reflects light beautifully.",
     "image": "./images/girl1.jpg",
-    "category": "글래스 스킨",
+    "category": "Glass Skin",
     "color": "from-pink-50/80 to-rose-50/80"
   },
   {
     "id": 2,
-    "title": "하이드라 부스트 테라피",
-    "subtitle": "수분 장벽 케어",
-    "description": "한국 스킨케어에서 영감을 받은 깊은 수분 공급 시술로 촉촉하고 탱탱한 피부를 유지하세요.",
+    "title": "HYDRA BOOST THERAPY",
+    "subtitle": "MOISTURE BARRIER",
+    "description": "Deep hydration treatment inspired by Korean skincare for plump, dewy skin. Restore your skin's natural moisture balance with our premium therapy.",
     "image": "./images/girl2.jpg",
-    "category": "수분 케어",
+    "category": "Hydration",
     "color": "from-cyan-50/80 to-blue-50/80"
   },
   {
@@ -45,3 +46,4 @@
     "color": "from-emerald-50/80 to-teal-50/80"
   }
 ]
+}

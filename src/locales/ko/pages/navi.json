@@ -1,7 +1,10 @@
-[
-  { "pk": 0, "path": "/", "label": "홈", "display": false, "mobileOnly": true },
-  { "pk": 1, "path": "/event", "label": "이벤트", "display": true },
-  { "pk": 2, "path": "/about", "label": "소개", "display": true },
-  { "pk": 3, "path": "/treatments", "label": "시술 안내", "display": true },
-  { "pk": 4, "path": "/", "label": "문의", "display": true, "scrollToId": "contacts" }
-]
+{
+  "book": "예약하기",
+  "menu": "메뉴",
+  "items": [
+    { "pk": 1, "label": "소개", "path": "/", "scrollToId": "about", "display": true },
+    { "pk": 2, "label": "시술", "path": "/treatments", "display": true },
+    { "pk": 3, "label": "이벤트", "path": "/event", "display": true },
+    { "pk": 4, "label": "연락처", "path": "/", "scrollToId": "contacts", "display": true }
+  ]
+}

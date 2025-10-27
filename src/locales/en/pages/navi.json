@@ -1,7 +1,10 @@
-[
-  { "pk": 0, "path": "/", "label": "HOME", "display": false, "mobileOnly": true },
-  { "pk": 1, "path": "/event", "label": "EVENTS", "display": true },
-  { "pk": 2, "path": "/about", "label": "ABOUT", "display": true },
-  { "pk": 3, "path": "/treatments", "label": "TREATMENTS", "display": true },
-  { "pk": 4, "path": "/", "label": "CONTACT", "display": true, "scrollToId": "contacts"  }
-]
+{
+  "book": "Book Now",
+  "menu": "Menu",
+  "items": [
+    { "pk": 1, "label": "About", "path": "/", "scrollToId": "about", "display": true },
+    { "pk": 2, "label": "Treatments", "path": "/treatments", "display": true },
+    { "pk": 3, "label": "Events", "path": "/event", "display": true },
+    { "pk": 4, "label": "Contact", "path": "/", "scrollToId": "contacts", "display": true }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "book": "예약하기",
+  "menu": "메뉴",
+  "items": [
+    { "pk": 1, "label": "병원소개", "path": "/About", "display": true },
+    { "pk": 2, "label": "시술안내", "path": "/treatments", "display": true },
+    { "pk": 3, "label": "이벤트", "path": "/event", "display": true },
+    { "pk": 4, "label": "오시는길", "path": "/", "scrollToId": "contacts", "display": true }
+  ]
+}

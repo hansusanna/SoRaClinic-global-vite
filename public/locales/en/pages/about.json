@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "About SoRa Clinic",
+    "subtitle": "We are passionate K-beauty specialists dedicated to delivering a true glass-skin experience for every client."
+  },
+  "timeline": {
+    "title": "Our Beauty Journey",
+    "items": [
+      {
+        "year": "2018",
+        "title": "SoRa Clinic Founded",
+        "description": "We established SoRa Clinic to bring impeccable K-beauty treatments to clients around the world."
+      },
+      {
+        "year": "2019",
+        "title": "Launched Signature Glass-Skin Treatment",
+        "description": "We introduced our exclusive glass-skin treatment and led the global standard for K-beauty."
+      },
+      {
+        "year": "2020",
+        "title": "K-Beauty Innovation",
+        "description": "Even during the pandemic, we advanced deep hydration therapies and built a remote home-care consulting system."
+      },
+      {
+        "year": "2022",
+        "title": "Expanded Expert Team & Opened Gangnam VIP Clinic",
+        "description": "We grew our team of K-beauty experts and opened a flagship VIP clinic in Gangnam."
+      },
+      {
+        "year": "2024",
+        "title": "Won Global K-Beauty Award",
+        "description": "Awarded “Best K-Beauty Clinic,” expanding our signature treatments worldwide."
+      },
+      {
+        "year": "2025",
+        "title": "Launched SoRa Clinic Global Website",
+        "description": "Opened a global website to make booking easy and seamless for international clients."
+      }
+    ]
+  },
+  "doctors": {
+    "title": "Meet Our Medical Team",
+    "items": [
+      { "name": "Dr. Sora Kim",      "role": "Founder / Medical Director", "image": "/images/doctor/doctor1.png" },
+      { "name": "Dr. Min-Jung Lee",  "role": "Dermatologist",               "image": "/images/doctor/doctor2.png" },
+      { "name": "Ji-Woo Park",       "role": "Dermatologist",               "image": "/images/doctor/doctor3.png" },
+      { "name": "Hye-Jin Choi",      "role": "Skin Consultant",             "image": "/images/doctor/doctor4.png" }
+    ]
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "At SoRa Clinic, we believe everyone deserves the skin they dream of...",
+    "points": [
+      { "title": "Authentic K-Beauty", "description": "Where timeless Korean skincare wisdom meets modern innovation" },
+      { "title": "Professional Care",  "description": "A highly trained team guiding every step of your skin journey" },
+      { "title": "Personalized Results","description": "Treatments tailored to your unique skin needs" }
+    ]
+  }
+}

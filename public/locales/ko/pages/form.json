@@ -1,0 +1,32 @@
+{
+  "title": "SoRaClinic 예약",
+  "description": "전문 뷰티 스페셜리스트와 함께 빛나는 피부를 위한 여정을 시작하세요. 맞춤형 상담 및 시술 계획을 위해 아래 양식을 작성해주세요.",
+  "fields": {
+    "name": { "label": "성명 *", "placeholder": "성함을 입력하세요" , "required": true },
+    "email": { "label": "이메일 주소 *", "placeholder": "your.email@example.com" , "required": true },
+    "phone": { "label": "연락처(전화번호) *", "placeholder": "+82 10-1234-5678" , "required": true },
+    "treatmentType": { "label": "희망 시술 *", "placeholder": "원하는 시술을 선택하세요", "required": true },
+    "appointmentDate": { "label": "희망 날짜", "placeholder": "날짜 선택", "required": true },
+    "timeSlot": { "label": "희망 시간", "placeholder": "시간대를 선택하세요", "required": true },
+    "skinType": { "label": "피부 타입", "placeholder": "피부 타입을 선택하세요" , "required": true },
+    "skinConcerns": { "label": "주요 피부 고민", "placeholder": "주요 고민을 선택하세요", "required": true },
+    "previousTreatments": { "label": "이전 시술/관리 이력", "placeholder": "이전 시술, 스킨케어 루틴, 현재 사용 제품 등을 기재해주세요.", "required": true },
+    "allergies": { "label": "알레르기/민감 항목", "placeholder": "알고 계신 알레르기나 민감성 정보를 기재해주세요." , "required": true },
+    "message": { "label": "고객 목표/메모", "placeholder": "시술 목표나 궁금한 점을 알려주세요." , "required": true }
+  },
+  "sections": {
+    "personal": "개인 정보",
+    "appointment": "예약 상세",
+    "assessment": "뷰티 문진"
+  },
+  "buttons": {
+    "cancel": "취소",
+    "submit": "예약하기",
+    "submitting": "예약 중."
+  },
+  "toast": {
+    "missingFields": "필수 항목을 모두 입력해주세요.",
+    "success": "예약이 성공적으로 제출되었습니다! 24시간 내에 연락드리겠습니다.",
+    "error": "예약 제출에 실패했습니다. 다시 시도해주세요."
+  }
+}

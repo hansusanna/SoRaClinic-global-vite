@@ -1,0 +1,10 @@
+{
+  "book": "Book Now",
+  "menu": "Menu",
+  "items": [
+    { "pk": 1, "label": "About", "path": "/About", "display": true },
+    { "pk": 2, "label": "Treatments", "path": "/treatments", "display": true },
+    { "pk": 3, "label": "Events", "path": "/event", "display": true },
+    { "pk": 4, "label": "Contact", "path": "/", "scrollToId": "contacts", "display": true }
+  ]
+}

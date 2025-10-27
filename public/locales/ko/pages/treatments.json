@@ -1,0 +1,60 @@
+{
+  "title": "시술 프로그램",
+  "subtitle": "소라 클리닉의 전문적인 시술 프로그램을 통해 당신의 아름다움을 한 단계 끌어올리세요. 최신 기술과 숙련된 전문가가 최상의 결과를 약속합니다.",
+  "items": [
+    {
+      "id": 1,
+      "title": "콜라겐 스킨 페이셜",
+      "excerpt": "수분·장벽·광채를 동시 케어하는 시그니처 페이셜. 민감 피부도 편안하게 맑은 윤기를 회복합니다.",
+      "image": "/images/product/product_img01.png",
+      "author": "Dr. Sora Kim",
+      "date": "상시 진행",
+      "category": "facial"
+    },
+    {
+      "id": 2,
+      "title": "브라이트닝 레이저 토닝",
+      "excerpt": "잡티·칙칙함을 완화하고 전체 톤을 맑게 정리하는 저자극 레이저 토닝 프로그램.",
+      "image": "/images/product/product_img02.png",
+      "author": "Dr. Min-Jung Lee",
+      "date": "상시 진행",
+      "category": "brightening"
+    },
+    {
+      "id": 3,
+      "title": "보톡스 안티에이징",
+      "excerpt": "표정 주름을 부드럽게 완화하고 또렷한 인상을 만드는 정밀 보톡스 시술.",
+      "image": "/images/product/product_img03.png",
+      "author": "Ji-Woo Park",
+      "date": "상시 진행",
+      "category": "injectable"
+    },
+    {
+      "id": 4,
+      "title": "히알루론산 필러 컨투어링",
+      "excerpt": "자연스러운 볼륨과 윤곽 개선을 위한 프리미엄 HA 필러 맞춤 시술.",
+      "image": "/images/product/product_img04.png",
+      "author": "Hye-Jin Choi",
+      "date": "상시 진행",
+      "category": "injectable"
+    },
+    {
+      "id": 5,
+      "title": "여드름/트러블 케어 프로그램",
+      "excerpt": "염증 케어부터 피지·각질 관리, 자국 완화까지 단계별 종합 솔루션.",
+      "image": "/images/product/product_img05.png",
+      "author": "December 10, 2025",
+      "date": "상시 진행",
+      "category": "skincare"
+    },
+    {
+      "id": 6,
+      "title": "모공·결 개선 리서피싱",
+      "excerpt": "미세박피·에너지 레이저를 활용해 모공, 잔주름, 피부결을 균일하게 정돈합니다.",
+      "image": "/images/product/product_img06.png",
+      "author": "December 8, 2025",
+      "date": "상시 진행",
+      "category": "laser"
+    }
+  ]
+}

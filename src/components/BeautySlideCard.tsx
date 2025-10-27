@@ -1,6 +1,7 @@
-// src/components/carousel/BeautySlideCard.tsx
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { Slide } from '@/db/type/slide'
+import { toAssetUrl } from '@/utils/asset'
 
 type Props = {
   slide: Slide
@@ -17,6 +18,11 @@ const BeautySlideCard = memo(function BeautySlideCard({
   onClick,
   onLearnMore,
 }: Props) {
+  //'slides' 네임스페이스를 사용하여 t 함수를 가져옵니다.
+  const { t } = useTranslation('slides')
+  // 경로 정규화
+  const imgSrc = toAssetUrl(slide.image)
+
   return (
     <div
       className="absolute w-[300px] h-[420px] md:w-[500px] md:h-[650px] cursor-pointer group"
@@ -25,11 +31,14 @@ const BeautySlideCard = memo(function BeautySlideCard({
     >
       <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-all duration-500 bg-white border border-pink-100/50">
         <img
-          src={slide.image}
+          src={imgSrc}
           alt={slide.title}
-          className="w-full h-full object-cover"
-          loading={isCenter ? 'eager' : 'lazy'}
-          decoding="async"
+          width={500}          // CLS 방지용 고정 크기(컨테이너와 비슷하게)
+          height={650}
+          className="w-full h-full object-cover transform-gpu will-change-transform"
+          loading={isCenter ? 'eager' : 'lazy'}  // 센터 이미지는 즉시 로드
+          fetchPriority={isCenter ? 'high' : 'auto'}   // 크롬 우선 로딩 힌트
+          decoding="auto"
         />
 
         {/* Soft Beauty Overlay */}
@@ -58,22 +67,20 @@ const BeautySlideCard = memo(function BeautySlideCard({
           </p>
 
           {/* Learn More Button */}
-          <button
-            onClick={(e) => {
+          <button onClick={(e) => {
               e.stopPropagation()
               onLearnMore()
             }}
-            className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full text-pink-500 md:hover:bg-white md:hover:text-pink-600 transition-all duration-300 font-medium opacity-0 md:group-hover:opacity-100 translate-y-4 md:group-hover:translate-y-0 border border-pink-200/50 shadow-sm text-sm md:text-base"
-          >
-            Learn More
+            className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full text-pink-500 md:hover:bg-white md:hover:text-pink-600 transition-all duration-300 font-medium border border-pink-200/50 shadow-sm text-sm md:text-base">   
+            {t('learnMore')}
           </button>
         </div>
 
         {/* Center Highlight Effect */}
-        {isCenter && <div className="absolute inset-0 border-2 border-pink-300/40 rounded-3xl" />}
+        {isCenter && <div className="absolute inset-0 border-2 border-pink-300/40 rounded-3xl pointer-events-none" />}
 
         {/* Elegant Hover Effect */}
-        <div className="absolute inset-0 bg-gradient-to-t from-pink-400/10 via-transparent to-transparent opacity-0 md:group-hover:opacity-100 transition-all duration-500 flex items-center justify-center"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-pink-400/10 via-transparent to-transparent opacity-0 md:group-hover:opacity-100 transition-all duration-500 flex items-center justify-center pointer-events-none"></div>
       </div>
     </div>
   )

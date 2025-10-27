@@ -1,20 +1,37 @@
 {
   "treatments": {
     "title": "Treatments",
-    "subtitle": "Expert K-beauty treatments, skincare solutions, and professional services from our SoRa Clinic specialists"
+    "subtitle": "Professional K-Beauty treatments, skincare solutions, and specialist services provided by Sora Clinic experts."
   },
   "event": {
     "title": "Special Promotions",
-    "subtitle": "Exclusive K-beauty offers for international clients at SoRa Clinic. Experience premium Korean beauty treatments with special discounted rates.",
-    "limited": "Limited Time Offers - Book Your Beauty Transformation Now!",
-    "expired": "Expired",
-    "included": "What's Included:"
+    "subtitle": "Exclusive K-Beauty offers for international clients at Sora Clinic. Enjoy premium Korean beauty treatments at special prices.",
+    "limited": "Limited-time offer — book your beauty treatment now!",
+    "expired": "Expired Offers",
+    "included": "Included:",
+    "more": "+{{count}} more"
   },
   "buttons": {
-    "bookThis": "Book This",
-    "askQuestions": "Ask Questions",
+    "bookNow": "Book Now",
+    "bookThis": "Book This Treatment",
+    "askQuestions": "Ask a Question",
     "readArticle": "Read Article",
     "close": "Close",
     "learnMore": "Learn More"
+  },
+  "footer": {
+    "description": "A premium K-Beauty clinic that elevates your beauty with cutting-edge technology and expert care.",
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "events": "Events"
+    },
+    "contact": {
+      "title": "Contact",
+      "address": "Gangnam-gu, Seoul, Republic of Korea",
+      "phone": "+82 2-1234-5678",
+      "email": "contact@soraclinic.com"
+    },
+    "rights": "All rights reserved."
   }
 }

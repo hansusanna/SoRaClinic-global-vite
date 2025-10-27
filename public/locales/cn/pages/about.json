@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "关于 SoRa Clinic",
+    "subtitle": "我们是一支充满热情的 K-Beauty 专家团队，致力于为每位客户呈现真正的玻璃肌体验."
+  },
+  "timeline": {
+    "title": "我们的美丽旅程",
+    "items": [
+      {
+        "year": "2018",
+        "title": "SoRa Clinic 成立",
+        "description": "我们创立 SoRa Clinic，旨在为全球客户提供卓越的 K-Beauty 医美疗程。"
+      },
+      {
+        "year": "2019",
+        "title": "推出招牌玻璃肌疗程",
+        "description": "发布独家玻璃肌项目，引领全球 K-Beauty 新标准。"
+      },
+      {
+        "year": "2020",
+        "title": "K-Beauty 创新",
+        "description": "即使在疫情期间，我们仍持续迭代深层补水疗法，并建立远程居家护肤咨询系统。"
+      },
+      {
+        "year": "2022",
+        "title": "专家团队扩编 & 江南 VIP 旗舰开业",
+        "description": "扩充 K-Beauty 专家团队，并在首尔江南开设 VIP 旗舰门店。"
+      },
+      {
+        "year": "2024",
+        "title": "斩获全球 K-Beauty 大奖",
+        "description": "荣获“Best K-Beauty Clinic”称号，将招牌疗程拓展至全球。"
+      },
+      {
+        "year": "2025",
+        "title": "上线 SoRa Clinic 全球网站",
+        "description": "面向海外客户推出全球预约网站，提供更便捷的预约体验。"
+      }
+    ]
+  },
+  "doctors": {
+    "title": "医疗团队",
+    "items": [
+      { "name": "Dr. Sora Kim",      "role": "创始人 / 医疗院长", "image": "/images/doctor/doctor1.png" },
+      { "name": "Dr. Min-Jung Lee",  "role": "皮肤科医生",         "image": "/images/doctor/doctor2.png" },
+      { "name": "Ji-Woo Park",       "role": "皮肤科医生",         "image": "/images/doctor/doctor3.png" },
+      { "name": "Hye-Jin Choi",      "role": "皮肤护理顾问",       "image": "/images/doctor/doctor4.png" }
+    ]
+  },
+  "mission": {
+    "title": "我们的使命",
+    "description": "在 SoRa Clinic，我们相信每个人都值得拥有理想中的肌肤……",
+    "points": [
+      { "title": "正宗 K-Beauty", "description": "融合韩国护肤传统智慧与现代科技创新" },
+      { "title": "专业护理",      "description": "高水平专家团队，全程守护你的肌肤之旅" },
+      { "title": "定制化效果",    "description": "针对个体肤质需求量身定制疗程" }
+    ]
+  }
+}
