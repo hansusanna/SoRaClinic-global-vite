@@ -4,7 +4,7 @@ SoRa_React는 Vite로 구축된 현대적인 React 기반 뷰티/스킨 웹사�
 포괄적인 UI 컴포넌트 라이브러리와 홈, 이벤트, 소개, 치료, 관리자 기능을 포함한 여러 페이지를 제공합니다.
 
 SoRa_React
-- 개발주소 https://sora-react.vercel.app/
+- 개발주소 [https://sora-react.vercel.app/](https://soraclinic-global.vercel.app/)
 - 깃허브 https://github.com/hansusanna/SoRaClinic-global-vite
 
 ## 필수 요구사항
@@ -133,14 +133,13 @@ Mobile (< md:)
 **개발 명령어**
 - `npm run dev` - 개발 서버 시작
 - `npm run build` - 프로덕션용 빌드
-- 기본적으로 서버는 포트 3000에서 실행됩니다
 
 **기술 스택**
 - 프론트엔드: React 18, TypeScript
 - 빌드 도구: Vite
 - UI 컴포넌트: Radix UI, Tailwind CSS
 - 스타일링: CSS 모듈, Tailwind CSS
-- 백엔드: Supabase 통합
+- 백엔드: Supabase 예약 페이지 연동
 - 폼: React Hook Form
 
 **시작하기**
