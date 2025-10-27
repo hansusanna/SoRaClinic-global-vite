@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "胶原蛋白面部护理",
+    "excerpt": "同时补水、强化屏障并提升光泽的招牌护理，即使敏感肌也能恢复清透光彩。",
+    "image": "/images/product/product_img01.png",
+    "author": "Dr. Sora Kim",
+    "date": "常年提供",
+    "category": "facial"
+  },
+  {
+    "id": 2,
+    "title": "焕亮激光净肤",
+    "excerpt": "温和的激光疗程，改善色斑与暗沉，整体提亮肤色与通透感。",
+    "image": "/images/product/product_img02.png",
+    "author": "Dr. Min-Jung Lee",
+    "date": "常年提供",
+    "category": "brightening"
+  },
+  {
+    "id": 3,
+    "title": "肉毒抗衰老",
+    "excerpt": "精准的肉毒注射，柔化表情纹，呈现更加年轻自然的面容。",
+    "image": "/images/product/product_img03.png",
+    "author": "Ji-Woo Park",
+    "date": "常年提供",
+    "category": "injectable"
+  },
+  {
+    "id": 4,
+    "title": "玻尿酸塑形填充",
+    "excerpt": "高端 HA 填充疗程，恢复自然体积，优化面部轮廓比例。",
+    "image": "/images/product/product_img04.png",
+    "author": "Hye-Jin Choi",
+    "date": "常年提供",
+    "category": "injectable"
+  },
+  {
+    "id": 5,
+    "title": "痘痘/问题肌护理方案",
+    "excerpt": "综合性分步骤解决炎症控制、皮脂/角质平衡以及痘印管理。",
+    "image": "/images/product/product_img05.png",
+    "author": "2025年12月10日",
+    "date": "常年提供",
+    "category": "skincare"
+  },
+  {
+    "id": 6,
+    "title": "毛孔与肤质重塑",
+    "excerpt": "微焕肤与能量型激光结合，改善毛孔、细纹及整体肤质平整度。",
+    "image": "/images/product/product_img06.png",
+    "author": "2025年12月8日",
+    "date": "常年提供",
+    "category": "laser"
+  }
+]

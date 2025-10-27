@@ -1,0 +1,15 @@
+[
+  { "id": "name", "label": "姓名 *", "type": "text", "required": true, "section": "personal" },
+  { "id": "email", "label": "电子邮箱 *", "type": "email", "required": true, "section": "personal" },
+  { "id": "phone", "label": "联系电话 *", "type": "tel", "required": true, "section": "personal" },
+
+  { "id": "treatmentType", "label": "期望项目 *", "type": "select", "optionsKey": "treatmentTypes", "required": true, "section": "appointment" },
+  { "id": "appointmentDate", "label": "期望日期", "type": "date", "section": "appointment" },
+  { "id": "timeSlot", "label": "期望时间", "type": "select", "optionsKey": "timeSlots", "section": "appointment" },
+
+  { "id": "skinType", "label": "肤质类型", "type": "select", "optionsKey": "skinTypes", "section": "assessment" },
+  { "id": "skinConcerns", "label": "主要肌肤困扰", "type": "select", "optionsKey": "skinConcernOptions", "section": "assessment" },
+  { "id": "previousTreatments", "label": "以往美容治疗/护理", "type": "textarea", "section": "assessment" },
+  { "id": "allergies", "label": "过敏与敏感信息", "type": "textarea", "section": "assessment" },
+  { "id": "message", "label": "美肤目标/备注", "type": "textarea", "section": "assessment" }
+]

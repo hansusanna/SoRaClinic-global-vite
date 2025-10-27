@@ -1,11 +1,46 @@
-import type { Doctor, TimelineItem } from "@/db/type/about";
-import doctorsData from "@/db/doctors.json";
-import timelineData from "@/db/timeline.json";
+import type { Doctor, TimelineItem } from "@/db/type/about"
 import DoctorsSection from '@/components/DoctorSection'
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+type JsonMod<T> = { default: T }
+
+const mapLang = (lng: string) => {
+  const l = lng.toLowerCase()
+  if (l.startsWith('ko')) return 'ko'
+  if (l.startsWith('zh') || l.startsWith('cn')) return 'cn'
+  return 'en'
+}
 
 export default function About() {
-  const doctors = doctorsData as Doctor[];
-  const timeline = timelineData as TimelineItem[];
+  const { i18n } = useTranslation()
+  const [doctors, setDoctors] = useState<Doctor[]>([])
+  const [timeline, setTimeline] = useState<TimelineItem[]>([])
+
+  useEffect(() => {
+    let alive = true
+    ;(async () => {
+      const lang = mapLang(i18n.language)
+      try {
+        const [staffMod, timelineMod] = await Promise.all([
+          import(`@/locales/${lang}/pages/doctors.json`),
+          import(`@/locales/${lang}/pages/timeline.json`)
+        ])
+         if (!alive) return
+      setDoctors(staffMod.default)
+      setTimeline(timelineMod.default)
+      } catch {
+        // 폴백: 언어 JSON이 없으면 db의 기본 파일 사용
+        const [staffMod, timelineMod] = await Promise.all([
+          import('@/db/doctors.json') as Promise<JsonMod<Doctor[]>>,
+          import('@/db/timeline.json') as Promise<JsonMod<TimelineItem[]>>
+        ])
+        if (!alive) return
+         setDoctors(staffMod.default)
+        setTimeline(timelineMod.default)
+      }
+    })()
+    return () => { alive = false }
+  }, [i18n.language])
 
   return (
     <div className="relative min-h-screen">

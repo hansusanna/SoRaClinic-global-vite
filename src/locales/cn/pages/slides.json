@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "玻璃肌护理",
+    "subtitle": "SoRa 特色项目",
+    "description": "通过 SoRa 的特色护理，实现光泽透亮的玻璃肌，展现宛如水晶般的光彩。",
+    "image": "/images/girl1.jpg",
+    "category": "玻璃肌",
+    "color": "from-pink-50/80 to-rose-50/80"
+  },
+  {
+    "id": 2,
+    "title": "水润修复疗程",
+    "subtitle": "保湿屏障",
+    "description": "灵感来自韩式护肤的深层补水疗程，为肌肤恢复天然水润屏障，保持水润饱满。",
+    "image": "/images/girl2.jpg",
+    "category": "补水护理",
+    "color": "from-cyan-50/80 to-blue-50/80"
+  },
+  {
+    "id": 3,
+    "title": "BRIGHTENING ESSENCE",
+    "subtitle": "LUMINOUS SKIN",
+    "description": "Achieve brighter, more even skin tone with our SoRa brightening treatments. Unveil your natural radiance with our specialized essence therapy.",
+    "image": "/images/girl3.jpg",
+    "category": "Brightening",
+    "color": "from-yellow-50/80 to-amber-50/80"
+  },
+  {
+    "id": 4,
+    "title": "GLOW UP FACIAL",
+    "subtitle": "RADIANT COMPLEXION",
+    "description": "Transform your skin with our premium SoRa glow enhancement therapy. Experience the ultimate Korean facial treatment for radiant, healthy skin.",
+    "image": "/images/girl4.jpg",
+    "category": "Glow Facial",
+    "color": "from-purple-50/80 to-pink-50/80"
+  },
+  {
+    "id": 5,
+    "title": "ANTI-AGING RITUAL",
+    "subtitle": "YOUTHFUL RADIANCE",
+    "description": "Premium anti-aging solutions combining traditional Korean wisdom with modern technology. Turn back time with our comprehensive anti-aging treatments.",
+    "image": "/images/girl5.jpg",
+    "category": "Anti-Aging",
+    "color": "from-emerald-50/80 to-teal-50/80"
+  }
+]

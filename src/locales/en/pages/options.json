@@ -1,0 +1,22 @@
+{
+  "treatmentTypes": [
+    "Consultation Only",
+    "Facial (Glass Skin)",
+    "Brightening / Tone-up",
+    "Botox",
+    "Filler",
+    "Laser / Pigmentation Removal",
+    "SoRa Beauty Package",
+    "Custom Treatment Plan",
+    "Skincare Program"
+  ],
+  "timeSlots": [
+    "9:00 AM","10:00 AM","11:00 AM","12:00 PM",
+    "2:00 PM","3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM"
+  ],
+  "skinTypes": ["Normal", "Dry", "Oily", "Combination", "Sensitive", "Not Sure"],
+  "skinConcernOptions": [
+    "Dullness / Lack of Glow", "Uneven Skin Tone", "Fine Lines / Loss of Elasticity", "Dehydration",
+    "Large Pores", "Acne / Breakouts", "Dark Spots", "Redness / Sensitivity", "Loss of Firmness", "Multiple Concerns"
+  ]
+}

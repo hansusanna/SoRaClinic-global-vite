@@ -1,14 +1,35 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { TreatmentPost } from '@/db/type/treatment'
 import TreatmentCard from '@/components/TreatmentCard'
-import raw from '@/db/treatments.json'
-import { Button } from '@/components/ui/button' // 원치 않으면 제거하고 <button>으로 대체 가능
+import { Button } from '@/components/ui/button'
+import { mapLang } from '@/i18n/pageLoader'
+type JsonMod<T> = { default: T }
 
 export default function Treatments() {
+  const { t } = useTranslation('common')
+  const { i18n } = useTranslation()
+  const [items, setItems] = useState<TreatmentPost[]>([])
   const [selectedItem, setSelectedItem] = useState<TreatmentPost | null>(null)
   const [clickedCard, setClickedCard] = useState<number | null>(null)
 
-  const items = raw as TreatmentPost[];
+  // 언어별 treatments.json 로드 (+ db 폴백)
+  useEffect(() => {
+    let alive = true
+    ;(async () => {
+      const lang = mapLang(i18n.language)
+      try {
+        const mod = await (import(`@/locales/${lang}/pages/treatments.json`) as Promise<JsonMod<TreatmentPost[]>>)
+        if (!alive) return
+        setItems(mod.default)
+      } catch {
+        const mod = await (import('@/db/treatments.json') as Promise<JsonMod<TreatmentPost[]>>)
+        if (!alive) return
+        setItems(mod.default)
+      }
+    })()
+    return () => { alive = false }
+  }, [i18n.language])
 
   // 모달 열렸을 때: ESC 닫기 + 스크롤 잠금
   useEffect(() => {
@@ -36,9 +57,9 @@ export default function Treatments() {
     <div className="mx-auto max-w-7xl py-8">
       {/* 헤더 */}
       <div className="mb-12 text-center">
-        <h1 className="mb-6 text-5xl text-slate-800">Treatments</h1>
+        <h1 className="mb-6 text-5xl text-slate-800">{t('treatments.title')}</h1>
         <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600">
-          Expert K-beauty treatments, skincare solutions, and professional services from our SoRa Clinic specialists
+            {t('treatments.subtitle')}
         </p>
       </div>
 
@@ -123,14 +144,14 @@ export default function Treatments() {
 
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <Button className="flex-1 rounded-full bg-tiffany px-6 py-2 text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-teal-500">
-                      Read Article
+                     {t('buttons.readArticle')}
                     </Button>
                     <Button
                       variant="outline"
                       className="rounded-full border-slate-300 px-4 py-2 text-slate-700 transition-all duration-300 hover:bg-slate-50"
                       onClick={() => setSelectedItem(null)}
                     >
-                      Close
+                       {t('buttons.close')}
                     </Button>
                   </div>
                 </div>

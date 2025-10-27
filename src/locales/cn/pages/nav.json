@@ -1,0 +1,7 @@
+[
+  { "pk": 0, "path": "/", "label": "首页", "display": false, "mobileOnly": true },
+  { "pk": 1, "path": "/event", "label": "活动", "display": true },
+  { "pk": 2, "path": "/about", "label": "关于我们", "display": true },
+  { "pk": 3, "path": "/treatments", "label": "诊疗项目", "display": true },
+  { "pk": 4, "path": "/", "label": "联系我们", "display": true, "scrollToId": "contacts" }
+]

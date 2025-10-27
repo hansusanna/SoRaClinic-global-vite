@@ -1,0 +1,20 @@
+{
+  "treatments": {
+    "title": "疗程项目",
+    "subtitle": "由 SoRa Clinic 专家团队提供的专业韩式美容疗程与皮肤护理方案"
+  },
+  "event": {
+    "title": "特惠活动",
+    "subtitle": "为海外客户推出的韩式美容专属优惠，在 SoRa Clinic 体验高端项目与特别折扣。",
+    "limited": "限时优惠 — 立即预约，焕变开启！",
+    "expired": "已结束",
+    "included": "项目包含："
+  },
+  "buttons": {
+    "bookThis": "立即预约",
+    "askQuestions": "咨询问题",
+    "readArticle": "阅读文章",
+    "close": "关闭",
+    "learnMore": "了解更多"
+  }
+}
