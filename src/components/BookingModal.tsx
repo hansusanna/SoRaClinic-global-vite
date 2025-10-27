@@ -8,12 +8,15 @@ import { Label } from './ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Textarea } from './ui/textarea'
 import { Calendar } from './ui/calendar'
+
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { toast } from 'sonner'
 
 import type { BookingForm, BookingOptions } from '@/db/type/booking'
 import type { TreatmentPost } from '@/db/type/treatment';
-import { projectId, publicAnonKey } from '../utils/supabase/info'
+// import { projectId, publicAnonKey } from '../utils/supabase/info'
+
+import { supabase } from '@/lib/supabaseClient'
 
 // form.json의 타입 정의
 interface FormFieldText {
@@ -190,7 +193,84 @@ export default function BookingModal({ open, onOpenChange, preselectedTreatment 
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // const handleSubmit2= async (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   if (isSubmitting || !formText) return // formText 로딩 안됐으면 제출 방지
+  //   setIsSubmitting(true)
+
+  //   try {
+  //     // required 필수값 확인
+  //     const missing = requiredKeys.filter(k => {
+  //       const v = formData[k]
+  //       return v === '' || v === undefined || v === null
+  //     })
+  //     if (missing.length > 0) {
+  //       toast.error(formText.toast.missingFields) 
+  //       setIsSubmitting(false)
+  //       return
+  //     }
+
+  //     // 전송 페이로드
+  //     const bookingData = {
+  //       name: formData.name,
+  //       email: formData.email,
+  //       phone: formData.phone,
+  //       treatment_type: formData.treatmentType,
+  //       appointment_date: formData.appointmentDate
+  //         ? new Date(formData.appointmentDate).toISOString().split('T')[0]
+  //         : '', // 날짜 형식 변환
+  //       time_slot: formData.timeSlot,
+  //       skin_type: formData.skinType,
+  //       skin_concerns: formData.skinConcerns,
+  //       previous_treatments: formData.previousTreatments,
+  //       allergies: formData.allergies,
+  //       message: formData.message,
+  //     }
+
+  //     const response = await fetch(
+  //       `https://${projectId}.supabase.co/functions/v1/make-server-3336005e/bookings`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Authorization: `Bearer ${publicAnonKey}`,
+  //         },
+  //         body: JSON.stringify(bookingData),
+  //       }
+  //     )
+
+  //     const result = await response.json()
+
+  //     if (response.ok && result.status === 'success') {
+  //       toast.success(formText.toast.success)
+  //       // Reset
+  //       setFormData({
+  //         name: '',
+  //         email: '',
+  //         phone: '',
+  //         treatmentType: '',
+  //         appointmentDate: undefined,
+  //         timeSlot: '',
+  //         skinType: '',
+  //         skinConcerns: '',
+  //         previousTreatments: '',
+  //         allergies: '',
+  //         message: '',
+  //       })
+  //       onOpenChange(false)
+  //     } else {
+  //       throw new Error(result.message || formText.toast.error)
+  //     }
+  //   } catch (err) {
+  //     console.error('Booking submission error:', err)
+  //     toast.error(formText.toast.error)
+  //   } finally {
+  //     setIsSubmitting(false)
+  //   }
+  // }
+
+  // 오늘 이전 날짜 비활성
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting || !formText) return // formText 로딩 안됐으면 제출 방지
     setIsSubmitting(true)
@@ -202,71 +282,83 @@ export default function BookingModal({ open, onOpenChange, preselectedTreatment 
         return v === '' || v === undefined || v === null
       })
       if (missing.length > 0) {
-        toast.error(formText.toast.missingFields) 
+        toast.error(formText.toast.missingFields)
         setIsSubmitting(false)
         return
       }
 
-      // 전송 페이로드
+      // Supabase DB 컬럼명(snake_case)과 일치시킴
       const bookingData = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        service: formData.treatmentType,
-        date: formData.appointmentDate
+        treatment_type: formData.treatmentType,
+        appointment_date: formData.appointmentDate
           ? new Date(formData.appointmentDate).toISOString().split('T')[0]
-          : '',
-        time: formData.timeSlot,
-        skinType: formData.skinType,
-        skinConcerns: formData.skinConcerns,
-        previousTreatments: formData.previousTreatments,
+          : '', // 날짜 형식 변환
+        time_slot: formData.timeSlot,
+        skin_type: formData.skinType,
+        skin_concerns: formData.skinConcerns,
+        previous_treatments: formData.previousTreatments,
         allergies: formData.allergies,
         message: formData.message,
       }
 
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-3336005e/bookings`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${publicAnonKey}`,
-          },
-          body: JSON.stringify(bookingData),
-        }
-      )
+     
+      // 'supabase' 클라이언트를 직접 사용하여 'bookings' 테이블에 삽입
+      const { data, error } = await supabase
+    .from('bookings')
+    .insert(bookingData)
+    .select() // <-- 이것을 추가해야 data에 값이 들어옵니다.
 
-      const result = await response.json()
-
-      if (response.ok && result.status === 'success') {
-        toast.success(formText.toast.success)
-        // Reset
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          treatmentType: '',
-          appointmentDate: undefined,
-          timeSlot: '',
-          skinType: '',
-          skinConcerns: '',
-          previousTreatments: '',
-          allergies: '',
-          message: '',
-        })
-        onOpenChange(false)
-      } else {
-        throw new Error(result.message || formText.toast.error)
+      if (error) {
+        // RLS가 켜져있다면 여기서 'permission denied' 오류가 발생합니다.
+        console.error('Supabase insert error:', error)
+        throw error;
       }
-    } catch (err) {
+      // --- (수정 끝) ---
+
+    // 성공 로직 (error가 없으면 성공)
+    if (data && data.length > 0) {
+      // data[0]가 방금 삽입된 예약 정보입니다.
+      console.log('성공적으로 삽입된 데이터:', data[0]);
+
+      // 예시: 토스트 메시지에 예약자 이름과 ID를 함께 표시
+      toast.success(`${data[0].name}님, 예약이 완료되었습니다. (예약 ID: ${data[0].id})`);
+    } else {
+      // data가 비어있는 비정상적인 경우 (이론상으론 error에서 걸러짐)
+      toast.success(formText.toast.success);
+    }
+      
+      // Reset
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        treatmentType: '',
+        appointmentDate: undefined,
+        timeSlot: '',
+        skinType: '',
+        skinConcerns: '',
+        previousTreatments: '',
+        allergies: '',
+        message: '',
+      })
+      onOpenChange(false)
+      
+    } catch (err: unknown) { 
       console.error('Booking submission error:', err)
-      toast.error(formText.toast.error)
+      let errorMessage = formText.toast.error;
+      // 'err'가 Error 객체인지 확인하여 안전하게 message에 접근
+      if (err instanceof Error) {
+        // RLS 오류 메시지를 포함할 수 있음
+        errorMessage = err.message;
+      }
+      toast.error(errorMessage)
     } finally {
       setIsSubmitting(false)
     }
   }
-
-  // 오늘 이전 날짜 비활성
   const isPast = (d: Date) => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
