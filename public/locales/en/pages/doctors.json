@@ -1,22 +1,22 @@
 [
   {
     "name": "Dr. Sora Kim",
-    "role": "Founder & Lead Aesthetician",
+    "role": "Founder · Medical Director",
     "image": "/images/doctor/doctor1.png"
   },
   {
     "name": "Dr. Min-Jung Lee",
-    "role": "Senior Dermatologist",
+    "role": "Board-Certified Dermatologist",
     "image": "/images/doctor/doctor2.png"
   },
   {
     "name": "Ji-Woo Park",
-    "role": "K-Beauty Specialist",
+    "role": "Board-Certified Dermatologist",
     "image": "/images/doctor/doctor3.png"
   },
   {
     "name": "Hye-Jin Choi",
-    "role": "Beauty Consultant",
+    "role": "Clinical Skin Consultant",
     "image": "/images/doctor/doctor4.png"
   }
 ]

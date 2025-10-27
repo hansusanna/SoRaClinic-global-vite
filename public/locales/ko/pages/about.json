@@ -1,0 +1,59 @@
+{
+  "header": {
+    "title": "소라 클리닉 소개",
+    "subtitle": "저희는 K-뷰티 전문가로서 투명한 피부 경험을 선사하기 위해 최선을 다하고 있습니다."
+  },
+  "timeline": {
+    "title": "소라 클리닉 History",
+    "items": [
+      {
+        "year": "2018",
+        "title": "SoRa Clinic 설립",
+        "description": "완벽한 K-뷰티 시술을 전 세계 고객에게 제공하기 위해 SoRa Clinic을 설립했습니다."
+      },
+      {
+        "year": "2019",
+        "title": "시그니처 글래스 스킨 트리트먼트 도입",
+        "description": "소라 클리닉만의 글래스 스킨 트리트먼트를 선보이며, 글로벌 K-뷰티 표준을 선도했습니다."
+      },
+      {
+        "year": "2020",
+        "title": "K-뷰티 혁신",
+        "description": "팬데믹 시기에도 고객을 위해 고도화된 수분 치료와 홈케어 상담 시스템을 개발했습니다."
+      },
+      {
+        "year": "2022",
+        "title": "전문 인력 확충 및 강남 VIP 클리닉 오픈",
+        "description": "K-뷰티 전문가 팀을 확충하고, 강남에 플래그십 클리닉을 오픈했습니다."
+      },
+      {
+        "year": "2024",
+        "title": "글로벌 K-뷰티 어워드 수상",
+        "description": "‘Best K-Beauty Clinic’ 상을 수상하며, 시그니처 시술을 전 세계로 확장했습니다."
+      },
+      {
+        "year": "2025",
+        "title": "SoRa Clinic 글로벌 사이트 오픈",
+        "description": "외국인 고객도 쉽게 예약할 수 있도록 SoRa Clinic 글로벌 웹사이트를 오픈했습니다."
+      }
+    ]
+  },
+  "doctors": {
+    "title": "의료진 소개",
+    "items": [
+      { "name": "Dr. Sora Kim",      "role": "설립자 / 대표원장", "image": "/images/doctor/doctor3.png" },
+      { "name": "Dr. Min-Jung Lee",  "role": "피부과 전문의",       "image": "/images/doctor/doctor2.png" },
+      { "name": "Ji-Woo Park",       "role": "피부과 전문의",       "image": "/images/doctor/doctor1.png" },
+      { "name": "Hye-Jin Choi",      "role": "피부 컨설턴트",       "image": "/images/doctor/doctor4.png" }
+    ]
+  },
+  "mission": {
+    "title": "우리의 미션",
+    "description": "소라 클리닉에서는 모든 분들이 꿈꾸는 피부를 가질 자격이 있다고 믿습니다.",
+    "points": [
+      { "title": "진정한 K-뷰티", "description": "전통적인 한국 스킨케어 지혜와 현대 혁신의 만남" },
+      { "title": "전문적인 케어", "description": "고객님의 피부 여정을 위한 고도로 훈련된 전문가" },
+      { "title": "맞춤형 결과",   "description": "고객 고유의 피부 요구에 맞춘 트리트먼트" }
+    ]
+  }
+}

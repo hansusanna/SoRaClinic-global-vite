@@ -1,4 +1,5 @@
-[
+{
+  "slides": [
   {
     "id": 1,
     "title": "GLASS SKIN TREATMENT",
@@ -45,3 +46,4 @@
     "color": "from-emerald-50/80 to-teal-50/80"
   }
 ]
+}

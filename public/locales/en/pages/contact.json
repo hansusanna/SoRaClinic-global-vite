@@ -1,0 +1,19 @@
+{
+  "openingHoursTitle": "OpeningHours",
+  "openingHours": [
+    { "days": "Monday - Friday", "hours": "10:00 AM – 8:00 PM" },
+    { "days": "Saturday", "hours": "10:00 AM – 3:00 PM" }
+  ],
+  "contactInfo": {
+    "address": "6F, 123 Building, Gangnam-gu, Seoul, Korea",
+    "email": "info@soraclinic.com",
+    "phone": "(+82) 555-5555",
+    "visitMessage": "Please come visit us once you have booked your preferred time."
+  },
+  "socialLinks": [
+    { "name": "Instagram", "href": "#" },
+    { "name": "Facebook", "href": "#" },
+    { "name": "Twitter", "href": "#" },
+    { "name": "Youtube", "href": "#" }
+  ]
+}

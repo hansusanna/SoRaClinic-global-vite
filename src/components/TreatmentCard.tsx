@@ -1,6 +1,7 @@
 
 import type { TreatmentPost } from '@/db/type/treatment'
 import { Button } from '@/components/ui/button'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   item: TreatmentPost
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export default function TreatmentCard({ item, onClick }: Props) {
+  const { t } = useTranslation('common')
   return (
     <div
       onClick={() => onClick(item.id)}
@@ -60,7 +62,8 @@ export default function TreatmentCard({ item, onClick }: Props) {
 
         <p className="text-gray-600 mb-6 leading-relaxed">{item.excerpt}</p>
 
-         <Button variant="ghost" className="px-6 py-2 rounded-full text-white bg-gradient-to-r from-tiffany to-pink-400">Read More
+         <Button variant="ghost" className="px-6 py-2 rounded-full text-white bg-gradient-to-r from-tiffany to-pink-400">
+          {t('buttons.readMore', 'Read More')}
         {/* <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
         </svg> */}

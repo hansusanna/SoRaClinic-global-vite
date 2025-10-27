@@ -1,0 +1,32 @@
+{
+  "title": "SoRa 诊所预约",
+  "description": "与专业美容专家一起，开启您容光焕发的肌肤之旅。请填写以下表格，安排您的个性化咨询和治疗计划。",
+  "fields": {
+    "name": { "label": "姓名 *", "placeholder": "请输入您的全名" , "required": true },
+    "email": { "label": "电子邮件地址 *", "placeholder": "your.email@example.com" , "required": true },
+    "phone": { "label": "联系电话 *", "placeholder": "+86 138-1234-5678" , "required": true },
+    "treatmentType": { "label": "期望的服务 *", "placeholder": "请选择您期望的服务" , "required": true },
+    "appointmentDate": { "label": "期望日期", "placeholder": "选择日期" , "required": true },
+    "timeSlot": { "label": "期望时间", "placeholder": "请选择时间段" , "required": true },
+    "skinType": { "label": "皮肤类型", "placeholder": "请选择您的皮肤类型", "required": true },
+    "skinConcerns": { "label": "主要皮肤问题", "placeholder": "请选择您的主要问题" , "required": true },
+    "previousTreatments": { "label": "以往的美容治疗", "placeholder": "请列出任何以往的面部治疗、护肤程序或当前使用的产品.", "required": true },
+    "allergies": { "label": "过敏和敏感", "placeholder": "请列出任何已知的过敏或皮肤敏感." , "required": true },
+    "message": { "label": "美容目标和备注", "placeholder": "告诉我们您的目标或问题." , "required": true }
+  },
+  "sections": {
+    "personal": "个人信息",
+    "appointment": "预约详情",
+    "assessment": "美容评估"
+  },
+  "buttons": {
+    "cancel": "取消",
+    "submit": "提交预约",
+    "submitting": "提交中."
+  },
+  "toast": {
+    "missingFields": "请填写所有必填字段。",
+    "success": "预约已成功提交！我们的团队将在24小时内与您联系。",
+    "error": "提交预约失败。请重试。"
+  }
+}

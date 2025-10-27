@@ -1,4 +1,5 @@
-import { EventItem } from "@/db/type/event";
+import { useTranslation } from 'react-i18next'
+import type { EventItem } from "@/db/type/event";
 
 type Props = {
   item: EventItem;
@@ -7,6 +8,11 @@ type Props = {
 };
 
 export default function EventCard({ item, onClick, active }: Props) {
+  // ★ 수정: 'event' 네임스페이스도 함께 불러옵니다.
+  const { t } = useTranslation(['common', 'event'])
+  const includes = Array.isArray(item.includes) ? item.includes : []
+  const rest = Math.max(0, includes.length - 2)
+
   return (
     <div
       className={`group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-500 border border-pink-100/50 cursor-pointer ${
@@ -54,16 +60,17 @@ export default function EventCard({ item, onClick, active }: Props) {
         <p className="text-gray-600 text-sm leading-relaxed mb-4">{item.description}</p>
 
         <div className="space-y-2">
-          <div className="text-xs text-gray-500 font-medium">INCLUDES:</div>
+          <div className="text-xs text-gray-500 font-medium">{t('included', { ns: 'event' })}</div>
           <div className="flex flex-wrap gap-1">
-            {item.includes.slice(0, 2).map((include, index) => (
+            {includes.slice(0, 2).map((include, index) => (
               <span key={index} className="text-xs bg-pink-50 text-pink-700 px-2 py-1 rounded">
                 {include}
               </span>
             ))}
-            {item.includes.length > 2 && (
+            {rest > 0 && (
               <span className="text-xs bg-gradient-to-r from-[#0ABAB5]/10 to-pink-100 text-[#0ABAB5] px-2 py-1 rounded">
-                +{item.includes.length - 2} more
+                 {/* 'event' 네임스페이스를 명시적으로 지정합니다. */}
+                {t('more', { ns: 'event', count: rest })}
               </span>
             )}
           </div>

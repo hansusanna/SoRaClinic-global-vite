@@ -28,7 +28,6 @@
   --medical-teal: #14B8A6;
   --medical-gray: #64748B;
   --soft-green: #10B981;
-
   --font-size: 16px;
 }
 .dark {
@@ -154,4 +153,11 @@
 .heading-medical{
   background: linear-gradient(135deg, #1F2937 0%, #0ABAB5 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* DayPicker 내비게이션 아이콘 크기/색 강제 */
+.rdp-chevron {
+  width: 1rem;   /* 16px */
+  height: 1rem;
+  color: currentColor; /* 버튼의 text-* 컬러를 따르게 */
 }

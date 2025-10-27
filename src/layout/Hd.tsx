@@ -1,82 +1,133 @@
+// src/layout/Hd.tsx
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { NavItem } from '@/db/type/navi'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { loadNavByLang, type NavItem } from '@/i18n/navLoader'
+import LanguageSelector from '@/components/LanguageSelector'
+import { useBookingModalTrigger } from '@/components/context/BookingModalContext'
 
-export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
+type LangCode = 'ko' | 'en' | 'cn'
+
+interface HdProps {
+  lang: LangCode
+}
+
+export default function Hd({ lang }: HdProps) {
   const [open, setOpen] = useState(false)
-  const [items, setItems] = useState<NavItem[]>([])
   const navigate = useNavigate()
   const location = useLocation()
-  const { i18n } = useTranslation()
+  const { t } = useTranslation('navi')
+  const openBookingModal = useBookingModalTrigger();
 
-  // 언어 변경 시 네비게이션 로드
-  useEffect(() => {
-    let alive = true
-    loadNavByLang(i18n.language).then((data) => {
-      if (!alive) return
-      setItems(data.filter((i) => i.display))
-    })
-    return () => {
-      alive = false
-    }
-  }, [i18n.language])
+  // 네비 아이템: 표시 비활성은 제외, label 누락 대비
+  const items = useMemo(() => {
+    const raw = (t('items', { returnObjects: true }) as NavItem[]) || []
+    return raw.filter((it) => it?.display !== false)
+  }, [t])
 
-  // 홈(/) + #id 일치하면 활성
-  const isHashActive = (id: string) =>
-    location.pathname === '/' && location.hash === `#${id}`
+  const bookText = t('book')
+  const menuText = t('menu')
 
-  // CONTACT 같은 섹션 스크롤 이동
-  const go = (id: string) => {
-    setOpen(false)
-    if (location.pathname === '/') {
-      if (location.hash !== `#${id}`) {
-        window.location.hash = `#${id}`
-      } else {
+  // 언어 프리픽스/경로 유틸
+  const prefix = `/${lang}`
+  const homePath = `${prefix}/`
+
+  // 중복 슬래시를 방지하고 / → 홈으로 매핑
+  const withPrefix = useCallback(
+    (p: string) => {
+      if (!p || p === '/') return homePath
+      // ensure single slash join
+      return `${prefix}${p.startsWith('/') ? p : `/${p}`}`.replace(/\/{2,}/g, '/')
+    },
+    [prefix, homePath]
+  )
+
+  // 홈 여부 + 해시 활성
+  const isHome = useMemo(() => {
+    // homePath.slice(0,-1) = '/ko'
+    return (
+      location.pathname === prefix ||
+      location.pathname === '/' ||
+      location.pathname === homePath.slice(0, -1)
+    )
+  }, [location.pathname, prefix, homePath])
+
+  const isHashActive = useCallback(
+    (id: string) => isHome && location.hash === `#${id}`,
+    [isHome, location.hash]
+  )
+
+  // 스크롤/이동
+  const go = useCallback(
+    (id: string) => {
+      setOpen(false)
+      if (isHome) {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        navigate(`${homePath}#${id}`)
       }
-    } else {
-      navigate(`/#${id}`)
-    }
-  }
+    },
+    [isHome, navigate, homePath]
+  )
+  
+  // 라우트 변경 시 모바일 시트 자동 닫힘
+  useEffect(() => {
+    if (open) setOpen(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname, location.hash])
+
+  // 공통 링크 클래스
+  const linkCls = useCallback(
+    (active: boolean) =>
+      `px-3 py-2 text-sm rounded-none transition ${
+        active
+          ? 'text-[#0ABAB5] border-b-2 border-[#0ABAB5]'
+          : 'text-gray-600 hover:text-pink-500'
+      }`,
+    []
+  )
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-pink-100/50" role="banner">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-pink-100/50"
+      role="banner"
+    >
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:px-3 focus:py-2 focus:rounded-md">
+        Skip to content
+      </a>
+
       <div className="mx-auto max-w-7xl px-4 md:px-6 h-16 flex items-center justify-between">
-        {/* 로고 -> 홈 */}
-        <Link to="/" aria-label="Go to home" className="text-2xl font-bold text-gray-800 hover:scale-105 transition-all duration-300">
-          <span className="text-[#0ABAB5]">SoRa</span><span className="text-pink-400">Clinic</span>
+        {/* 로고 */}
+        <Link
+          to={homePath}
+          aria-label="Go to home"
+          className="text-2xl font-bold text-gray-800 hover:scale-105 transition-all duration-300"
+        >
+          <span className="text-[#0ABAB5]">SoRa</span>
+          <span className="text-pink-400">Clinic</span>
         </Link>
 
         {/* 데스크탑 네비 */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6" aria-label="Primary">
           {items.map((item) =>
             item.scrollToId ? (
               <button
                 key={item.pk}
                 onClick={() => go(item.scrollToId!)}
-                className={`px-3 py-2 text-sm rounded-none transition ${
-                  isHashActive(item.scrollToId!)
-                    ? 'text-[#0ABAB5] border-b-2 border-[#0ABAB5]'
-                    : 'text-gray-600 hover:text-pink-500'
-                }`}
+                className={linkCls(isHashActive(item.scrollToId!))}
+                // 접근성: 현재 섹션이면 aria-current 지정
+                aria-current={isHashActive(item.scrollToId!) ? 'page' : undefined}
               >
                 {item.label}
               </button>
             ) : (
               <NavLink
                 key={item.pk}
-                to={item.path}
+                to={withPrefix(item.path)}
                 end
-                className={({ isActive }) =>
-                  `px-3 py-2 text-sm rounded-none transition ${
-                    isActive
-                      ? 'text-[#0ABAB5] border-b-2 border-[#0ABAB5]'
-                      : 'text-gray-600 hover:text-pink-500'
-                  }`
-                }
+                className={({ isActive }) => linkCls(isActive)}
               >
                 {item.label}
               </NavLink>
@@ -84,13 +135,19 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
           )}
         </nav>
 
+        {/* 우측 유틸 + 모바일 메뉴 */}
         <div className="flex items-center gap-2">
-          {/* 데스크탑 BOOK 버튼 */}
-          <Button onClick={onOpenBooking} variant="gradient" size="lg" className="rounded-full hidden md:inline-flex">
-            BOOK
+          <LanguageSelector />
+          <Button
+            onClick={openBookingModal}
+            variant="gradient"
+            size="lg"
+            className="rounded-full hidden md:inline-flex"
+          >
+            {bookText}
           </Button>
 
-          {/* 모바일 메뉴 */}
+          {/* 모바일 햄버거 */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <button className="md:hidden p-2 text-gray-600" aria-label="Open menu">
@@ -103,35 +160,33 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
               </button>
             </SheetTrigger>
 
-            <SheetContent side="right" className="w-80 bg-white/80 backdrop-blur-md border-l border-pink-100/50 shadow-xl">
+            <SheetContent
+              side="right"
+              className="w-80 bg-white/80 backdrop-blur-md border-l border-pink-100/50 shadow-xl"
+            >
               <SheetHeader className="text-left pb-4 border-b border-pink-100">
-                <SheetTitle className="text-2xl font-bold text-gray-800">Menu</SheetTitle>
+                <SheetTitle className="text-2xl font-bold text-gray-800">{menuText}</SheetTitle>
               </SheetHeader>
 
-              {/* 모바일 메뉴 리스트 */}
-              <nav className="mt-6 flex flex-col space-y-2">
+              {/* 모바일 네비: 데스크탑과 동일한 데이터/동작 */}
+              <nav className="mt-6 flex flex-col space-y-1" aria-label="Mobile">
                 {items.map((item) =>
                   item.scrollToId ? (
                     <button
                       key={item.pk}
                       onClick={() => go(item.scrollToId!)}
-                      className="text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 text-gray-600 hover:text-pink-500 hover:bg-white"
+                      className={linkCls(isHashActive(item.scrollToId!))}
+                      aria-current={isHashActive(item.scrollToId!) ? 'page' : undefined}
                     >
                       {item.label}
                     </button>
                   ) : (
                     <NavLink
                       key={item.pk}
-                      to={item.path}
+                      to={withPrefix(item.path)}
                       end
                       onClick={() => setOpen(false)}
-                      className={({ isActive }) =>
-                        `text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 ${
-                          isActive
-                            ? 'bg-white text-[#0ABAB5] border-l-4 border-[#0ABAB5]'
-                            : 'text-gray-600 hover:text-pink-500 hover:bg-white'
-                        }`
-                      }
+                      className={({ isActive }) => linkCls(isActive)}
                     >
                       {item.label}
                     </NavLink>
@@ -139,18 +194,17 @@ export default function Hd({ onOpenBooking }: { onOpenBooking?: () => void }) {
                 )}
               </nav>
 
-              {/* 모바일 BOOK 버튼 */}
               <div className="pt-6 border-t border-pink-100">
                 <Button
                   onClick={() => {
                     setOpen(false)
-                    onOpenBooking?.()
+                    openBookingModal?.()
                   }}
                   variant="gradient"
                   size="lg"
                   className="w-full rounded-full"
                 >
-                  BOOK
+                  {bookText}
                 </Button>
               </div>
             </SheetContent>

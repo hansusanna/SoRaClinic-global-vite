@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Dr. Sora Kim",
+    "role": "创始人 · 医疗院长",
+    "image": "/images/doctor/doctor1.png"
+  },
+  {
+    "name": "Dr. Min-Jung Lee",
+    "role": "皮肤科专科医生",
+    "image": "/images/doctor/doctor2.png"
+  },
+  {
+    "name": "Ji-Woo Park",
+    "role": "皮肤科学博士 · 研究员",
+    "image": "/images/doctor/doctor3.png"
+  },
+  {
+    "name": "Hye-Jin Choi",
+    "role": "临床皮肤顾问",
+    "image": "/images/doctor/doctor4.png"
+  }
+]

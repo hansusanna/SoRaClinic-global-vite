@@ -1,0 +1,60 @@
+{
+  "title": "疗程项目",
+  "subtitle": "通过 SoRa Clinic 的专业疗程，让你的美更进一步。结合先进技术与资深专家，为你呈现卓越效果。",
+  "items": [
+    {
+      "id": 1,
+      "title": "胶原焕活面部护理",
+      "excerpt": "招牌护理，同时补水、修护屏障并提升光泽。温和舒缓敏感肌，重现清透水光。",
+      "image": "/images/product/product_img01.png",
+      "author": "Dr. Sora Kim",
+      "date": "常年进行",
+      "category": "facial"
+    },
+    {
+      "id": 2,
+      "title": "焕亮激光调色",
+      "excerpt": "低刺激激光疗程，减淡色斑与暗沉，均匀提亮整体肤色。",
+      "image": "/images/product/product_img02.png",
+      "author": "Dr. Min-Jung Lee",
+      "date": "常年进行",
+      "category": "brightening"
+    },
+    {
+      "id": 3,
+      "title": "肉毒抗老",
+      "excerpt": "精准注射，柔化表情纹，打造神采更显的精致轮廓。",
+      "image": "/images/product/product_img03.png",
+      "author": "Ji-Woo Park",
+      "date": "常年进行",
+      "category": "injectable"
+    },
+    {
+      "id": 4,
+      "title": "透明质酸填充塑形",
+      "excerpt": "高端 HA 个性化填充，提升自然体积并优化面部轮廓。",
+      "image": "/images/product/product_img04.png",
+      "author": "Hye-Jin Choi",
+      "date": "常年进行",
+      "category": "injectable"
+    },
+    {
+      "id": 5,
+      "title": "痘痘/问题肌护理",
+      "excerpt": "分阶段综合方案：从炎症管理到皮脂与角质调理，再到印痕淡化。",
+      "image": "/images/product/product_img05.png",
+      "author": "December 10, 2025",
+      "date": "常年进行",
+      "category": "skincare"
+    },
+    {
+      "id": 6,
+      "title": "毛孔与肤质重塑",
+      "excerpt": "微剥脱与能量激光协同，细致毛孔、淡化细纹，令肌理更匀更滑。",
+      "image": "/images/product/product_img06.png",
+      "author": "December 8, 2025",
+      "date": "常年进行",
+      "category": "laser"
+    }
+  ]
+}

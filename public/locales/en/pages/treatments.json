@@ -1,0 +1,60 @@
+{
+  "title": "Treatment Programs",
+  "subtitle": "Elevate your beauty with SoRa Clinic’s professional treatment programs. Cutting-edge technology and skilled specialists deliver the best results.",
+  "items": [
+    {
+      "id": 1,
+      "title": "Collagen Skin Facial",
+      "excerpt": "Our signature facial that hydrates, fortifies the skin barrier, and boosts radiance all at once. Gentle enough for sensitive skin while restoring a clear, dewy glow.",
+      "image": "/images/product/product_img01.png",
+      "author": "Dr. Sora Kim",
+      "date": "Available year-round",
+      "category": "facial"
+    },
+    {
+      "id": 2,
+      "title": "Brightening Laser Toning",
+      "excerpt": "A low-irritation laser program that diminishes spots and dullness for an overall brighter, more even tone.",
+      "image": "/images/product/product_img02.png",
+      "author": "Dr. Min-Jung Lee",
+      "date": "Available year-round",
+      "category": "brightening"
+    },
+    {
+      "id": 3,
+      "title": "Botox Anti-Aging",
+      "excerpt": "Precisely placed Botox to soften expression lines and create a refreshed, well-defined look.",
+      "image": "/images/product/product_img03.png",
+      "author": "Ji-Woo Park",
+      "date": "Available year-round",
+      "category": "injectable"
+    },
+    {
+      "id": 4,
+      "title": "Hyaluronic Acid Filler Contouring",
+      "excerpt": "Personalized premium HA fillers to add natural volume and refine facial contours.",
+      "image": "/images/product/product_img04.png",
+      "author": "Hye-Jin Choi",
+      "date": "Available year-round",
+      "category": "injectable"
+    },
+    {
+      "id": 5,
+      "title": "Acne & Blemish Care Program",
+      "excerpt": "A step-by-step comprehensive solution—from calming inflammation to sebum/keratin management and post-blemish mark care.",
+      "image": "/images/product/product_img05.png",
+      "author": "December 10, 2025",
+      "date": "Available year-round",
+      "category": "skincare"
+    },
+    {
+      "id": 6,
+      "title": "Pore & Texture Resurfacing",
+      "excerpt": "Micro-peel and energy-based lasers refine pores, fine lines, and skin texture for a smoother, more even finish.",
+      "image": "/images/product/product_img06.png",
+      "author": "December 8, 2025",
+      "date": "Available year-round",
+      "category": "laser"
+    }
+  ]
+}

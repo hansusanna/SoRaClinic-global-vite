@@ -1,0 +1,19 @@
+{
+  "openingHoursTitle": "진료 시간",
+  "openingHours": [
+    { "days": "월–금", "hours": "오전 10:00 – 오후 8:00" },
+    { "days": "토요일", "hours": "오전 10:00 – 오후 3:00" }
+  ],
+  "contactInfo": {
+    "address": "서울특별시 강남구 123빌딩 6층",
+    "email": "info@soraclinic.com",
+    "phone": "(+82) 555-5555",
+    "visitMessage": "원하시는 시간으로 예약 완료 후 방문해 주세요."
+  },
+  "Social": [
+    { "name": "Instagram", "href": "#" },
+    { "name": "Facebook", "href": "#" },
+    { "name": "Twitter", "href": "#" },
+    { "name": "Youtube", "href": "#" }
+  ]
+}

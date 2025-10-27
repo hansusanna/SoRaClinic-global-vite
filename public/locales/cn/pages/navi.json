@@ -1,0 +1,10 @@
+{
+  "book": "预约",
+  "menu": "菜单",
+  "items": [
+    { "pk": 1, "label": "关于我们", "path": "/About", "display": true },
+    { "pk": 2, "label": "治疗项目", "path": "/treatments", "display": true },
+    { "pk": 3, "label": "活动", "path": "/event", "display": true },
+    { "pk": 4, "label": "联系我们", "path": "/", "scrollToId": "contacts", "display": true }
+  ]
+}

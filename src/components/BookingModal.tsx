@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react'
-import {
-  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle
-} from './ui/dialog'
+import { useMemo, useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
+
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
@@ -11,25 +11,52 @@ import { Calendar } from './ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { toast } from 'sonner'
 
-import type { BookingForm, BookingOptions, BookingField } from '@/db/type/booking'
-import rawOptions from '@/db/options.json'
-import rawFields from '@/db/form.json'
+import type { BookingForm, BookingOptions } from '@/db/type/booking'
+import type { TreatmentPost } from '@/db/type/treatment';
 import { projectId, publicAnonKey } from '../utils/supabase/info'
 
-// props 타입 (컴포넌트 밖에서 정의되어 있지 않다면 여기에 둠)
+// form.json의 타입 정의
+interface FormFieldText {
+  label: string
+  placeholder: string
+  required: boolean 
+}
+interface FormText {
+  title: string
+  description: string
+  fields: {
+    [key in keyof BookingForm | 'appointmentDate']: FormFieldText
+  }
+  sections: {
+    personal: string
+    appointment: string
+    assessment: string
+  }
+  buttons: {
+    cancel: string
+    submit: string
+    submitting: string
+  }
+  toast: {
+    missingFields: string
+    success: string
+    error: string
+  }
+}
+
 interface BookingModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  preselectedTreatment?: TreatmentPost | null;  
 }
 
-export default function BookingModal({ open, onOpenChange }: BookingModalProps) {
-  const options = rawOptions as BookingOptions
-  const fields = (rawFields as BookingField[]) ?? []
+export default function BookingModal({ open, onOpenChange, preselectedTreatment }: BookingModalProps) {
+  //현재 언어 감지
+  const { i18n } = useTranslation()
+  const currentLang = i18n.language
+  const [formText, setFormText] = useState<FormText | null>(null)
+  const [loadedOptions, setLoadedOptions] = useState<BookingOptions | null>(null)
 
-  // 옵션 구조 분해 (JSON에서 관리)
-  const { treatmentTypes, timeSlots, skinTypes, skinConcernOptions } = options
-
-  // 폼 상태
   const [formData, setFormData] = useState<BookingForm>({
     name: '',
     email: '',
@@ -45,21 +72,117 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  useEffect(() => {
+    let active = true
+
+    const loadData = async () => {
+      const formUrl = `/locales/${currentLang}/pages/form.json`
+      const optionsUrl = `/locales/${currentLang}/pages/options.json`
+      const fallbackFormUrl = `/locales/en/pages/form.json`
+      const fallbackOptionsUrl = `/locales/en/pages/options.json`
+
+      const fetchJson = async (url: string) => {
+        const response = await fetch(url)
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${url}: ${response.statusText}`)
+        }
+        return response.json()
+      }
+
+      try {
+        const [formDataResult, optionsDataResult] = await Promise.all([
+          fetchJson(formUrl),
+          fetchJson(optionsUrl)
+        ])
+
+        if (active) {
+          setFormText(formDataResult)
+          setLoadedOptions(optionsDataResult)
+        }
+      } catch (error) {
+        console.error(`Failed to load data for ${currentLang}:`, error)
+        try {
+          const [fallbackFormDataResult, fallbackOptionsDataResult] = await Promise.all([
+             fetchJson(fallbackFormUrl),
+             fetchJson(fallbackOptionsUrl)
+          ])
+          if (active) {
+            setFormText(fallbackFormDataResult)
+            setLoadedOptions(fallbackOptionsDataResult)
+          }
+        } catch (fallbackError) {
+          console.error(`Failed to load fallback data (en):`, fallbackError)
+          if (active) {
+             setFormText(null);
+             setLoadedOptions(null);
+          }
+        }
+      }
+    }
+
+    if (open) {
+      setFormText(null);
+      setLoadedOptions(null);
+      loadData()
+    }
+
+    return () => {
+      active = false
+    }
+  }, [currentLang, open])
+
+  // useEffect 2: preselectedTreatment 처리 및 폼 초기화
+  useEffect(() => {
+     // 모달 열림 + preselectedTreatment 값 존재 + options 로딩 완료 시 실행
+     if (open && preselectedTreatment && loadedOptions) {
+        // options.treatmentTypes 배열에서 preselectedTreatment.title 찾기
+        const isValidTreatment = loadedOptions.treatmentTypes.includes(preselectedTreatment.title);
+
+        if (isValidTreatment) {
+            // formData.treatmentType 업데이트
+            setFormData(prev => ({ ...prev, treatmentType: preselectedTreatment.title }));
+        } else {
+             console.warn(`Preselected treatment "${preselectedTreatment.title}" not found in available options.`);
+             // 못 찾으면 빈 값으로 설정
+             setFormData(prev => ({ ...prev, treatmentType: '' }));
+        }
+     } else if (!open) { // 모달 닫힐 때 실행
+        // 폼 데이터 초기화
+        setFormData({
+            name: '', email: '', phone: '', treatmentType: '', appointmentDate: undefined,
+            timeSlot: '', skinType: '', skinConcerns: '', previousTreatments: '',
+            allergies: '', message: '',
+        });
+     }
+  }, [open, preselectedTreatment, loadedOptions]);
+
   const requiredKeys = useMemo(
-    () =>
-      (fields.length
-        ? fields.filter(f => f.required).map(f => f.id)
-        : (['name', 'email', 'phone', 'treatmentType'] as (keyof BookingForm)[])),
-    [fields]
+    () =>{
+      // formText가 아직 로드 안됐으면 빈 배열 반환
+      if (!formText) return [] 
+      
+      // formText.fields 객체를 순회하며 'required: true'인 키만 필터링
+      return (Object.keys(formText.fields) as (keyof BookingForm)[])
+        .filter(key => formText.fields[key]?.required === true)
+    },
+    [formText]
   )
 
   const handleInputChange = <K extends keyof BookingForm>(field: K, value: BookingForm[K]) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
+  // 날짜 포맷과 플레이스홀더 수정
   const formatDate = (date: Date | undefined) => {
-    if (!date) return 'Select date'
-    return date.toLocaleDateString('en-US', {
+    if (!date) return formText ? formText.fields.appointmentDate.placeholder : 'Select date'
+    
+    // BCP 47 태그로 변환 (예: 'ko' -> 'ko-KR')
+    const locale = currentLang.startsWith('ko') ? 'ko-KR' : 
+                   currentLang.startsWith('en') ? 'en-US' : 
+                   currentLang.startsWith('zh') ? 'zh-CN' : 
+                   currentLang
+    
+    return date.toLocaleDateString(locale, {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -69,7 +192,7 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (isSubmitting) return
+    if (isSubmitting || !formText) return // formText 로딩 안됐으면 제출 방지
     setIsSubmitting(true)
 
     try {
@@ -79,7 +202,7 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
         return v === '' || v === undefined || v === null
       })
       if (missing.length > 0) {
-        toast.error('Please fill in all required fields.')
+        toast.error(formText.toast.missingFields) 
         setIsSubmitting(false)
         return
       }
@@ -116,7 +239,7 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
       const result = await response.json()
 
       if (response.ok && result.status === 'success') {
-        toast.success('Booking submitted successfully! Our team will contact you within 24 hours.')
+        toast.success(formText.toast.success)
         // Reset
         setFormData({
           name: '',
@@ -133,11 +256,11 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
         })
         onOpenChange(false)
       } else {
-        throw new Error(result.message || 'Failed to submit booking')
+        throw new Error(result.message || formText.toast.error)
       }
     } catch (err) {
       console.error('Booking submission error:', err)
-      toast.error('Failed to submit booking. Please try again.')
+      toast.error(formText.toast.error)
     } finally {
       setIsSubmitting(false)
     }
@@ -152,6 +275,22 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
     return dd < today
   }
 
+  if (!formText || !loadedOptions) {
+    return (
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="max-w-2xl bg-white p-10 text-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <span className="h-12 w-12 animate-spin rounded-full border-4 border-pink-200 border-t-pink-500" />
+            <p className="text-gray-600">Loading form...</p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+  
+  const { treatmentTypes, timeSlots, skinTypes, skinConcernOptions } = loadedOptions;
+
+  // 모든 UI 텍스트를 formText 객체에서 가져오도록 수정
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl bg-white border border-pink-200 text-gray-800 shadow-2xl rounded-2xl overflow-hidden">
@@ -159,45 +298,43 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-pink-50/30 via-white to-purple-50/20" />
         <div className="relative z-10 max-h-[90vh] overflow-y-auto p-6 pb-8">
           <DialogHeader className="mt-6 border-b border-pink-100 pb-6 text-center">
+            {/* JSON 구조에 따라 title이 "SoRa 클리닉 예약" 통째로 들어감 */}
             <DialogTitle className="mb-2 text-3xl font-bold text-gray-800">
-              Book Your{' '}
-              <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">SoRa</span>{' '}
-              Experience
+              {formText.title}
             </DialogTitle>
             <DialogDescription className="text-base leading-relaxed text-gray-600">
-              Begin your journey to radiant, glass-like skin with our expert beauty specialists. Fill out the form below
-              to schedule your personalized consultation and treatment plan.
+              {formText.description}
             </DialogDescription>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-      
+             {/* Personal Info Section */}
             <section className="space-y-4 rounded-2xl border border-pink-100 bg-pink-50/30 p-6">
               <h3 className="mb-4 flex items-center text-xl font-semibold text-gray-800">
                 <svg className="mr-2 h-5 w-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                Personal Information
+                {formText.sections.personal}
               </h3>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="font-medium text-gray-700">
-                    Full Name *
+                    {formText.fields.name.label}
                   </Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={e => handleInputChange('name', e.target.value)}
                     className="border-pink-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-pink-400 focus:ring-pink-400/20"
-                    placeholder="Enter your full name"
+                    placeholder={formText.fields.name.placeholder}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="email" className="font-medium text-gray-700">
-                    Email Address *
+                    {formText.fields.email.label}
                   </Label>
                   <Input
                     id="email"
@@ -205,7 +342,7 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                     value={formData.email}
                     onChange={e => handleInputChange('email', e.target.value)}
                     className="border-pink-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-pink-400 focus:ring-pink-400/20"
-                    placeholder="your.email@example.com"
+                    placeholder={formText.fields.email.placeholder}
                     required
                   />
                 </div>
@@ -213,7 +350,7 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
 
               <div className="space-y-2">
                 <Label htmlFor="phone" className="font-medium text-gray-700">
-                  Phone Number *
+                  {formText.fields.phone.label}
                 </Label>
                 <Input
                   id="phone"
@@ -221,7 +358,7 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                   value={formData.phone}
                   onChange={e => handleInputChange('phone', e.target.value)}
                   className="border-pink-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-pink-400 focus:ring-pink-400/20"
-                  placeholder="+1 (555) 123-4567"
+                  placeholder={formText.fields.phone.placeholder}
                   required
                 />
               </div>
@@ -233,14 +370,14 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                 <svg className="mr-2 h-5 w-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                Appointment Details
+                {formText.sections.appointment}
               </h3>
 
               <div className="space-y-2">
-                <Label className="font-medium text-gray-700">Preferred Treatment *</Label>
+                <Label className="font-medium text-gray-700">{formText.fields.treatmentType.label}</Label>
                 <Select value={formData.treatmentType} onValueChange={v => handleInputChange('treatmentType', v)}>
                   <SelectTrigger className="bg-white text-gray-800 focus:border-purple-400 focus:ring-purple-400/20 border-purple-200">
-                    <SelectValue placeholder="Select your desired treatment" />
+                    <SelectValue placeholder={formText.fields.treatmentType.placeholder} />
                   </SelectTrigger>
                   <SelectContent className="border-purple-200 bg-white text-gray-800">
                     {treatmentTypes.map(type => (
@@ -251,10 +388,9 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                   </SelectContent>
                 </Select>
               </div>
-
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label className="font-medium text-gray-700">Preferred Date</Label>
+                  <Label className="font-medium text-gray-700">{formText.fields.appointmentDate.label}</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
@@ -269,20 +405,20 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                     </PopoverTrigger>
                     <PopoverContent className="w-auto bg-white p-0 border-purple-200">
                       <Calendar
-                      selected={formData.appointmentDate}
-                      onSelect={(date) => handleInputChange('appointmentDate', date ?? undefined)}
-                      className="text-gray-800"
-                      disabled={(d) => isPast(d)}
+                        selected={formData.appointmentDate}
+                        onSelect={(date) => handleInputChange('appointmentDate', date ?? undefined)}
+                        className="text-gray-800"
+                        disabled={(d) => isPast(d)}
                       />
                     </PopoverContent>
                   </Popover>
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="font-medium text-gray-700">Preferred Time</Label>
+                  <Label className="font-medium text-gray-700">{formText.fields.timeSlot.label}</Label>
                   <Select value={formData.timeSlot} onValueChange={v => handleInputChange('timeSlot', v)}>
                     <SelectTrigger className="bg-white text-gray-800 focus:border-purple-400 focus:ring-purple-400/20 border-purple-200">
-                      <SelectValue placeholder="Select time slot" />
+                      <SelectValue placeholder={formText.fields.timeSlot.placeholder} />
                     </SelectTrigger>
                     <SelectContent className="border-purple-200 bg-white text-gray-800">
                       {timeSlots.map(time => (
@@ -302,15 +438,15 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                 <svg className="mr-2 h-5 w-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
-                Beauty Assessment
+                {formText.sections.assessment}
               </h3>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label className="font-medium text-gray-700">Skin Type</Label>
+                  <Label className="font-medium text-gray-700">{formText.fields.skinType.label}</Label>
                   <Select value={formData.skinType} onValueChange={v => handleInputChange('skinType', v)}>
                     <SelectTrigger className="bg-white text-gray-800 focus:border-teal-400 focus:ring-teal-400/20 border-teal-200">
-                      <SelectValue placeholder="Select your skin type" />
+                      <SelectValue placeholder={formText.fields.skinType.placeholder} />
                     </SelectTrigger>
                     <SelectContent className="border-teal-200 bg-white text-gray-800">
                       {skinTypes.map(type => (
@@ -323,10 +459,10 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="font-medium text-gray-700">Primary Skin Concerns</Label>
+                  <Label className="font-medium text-gray-700">{formText.fields.skinConcerns.label}</Label>
                   <Select value={formData.skinConcerns} onValueChange={v => handleInputChange('skinConcerns', v)}>
                     <SelectTrigger className="bg-white text-gray-800 focus:border-teal-400 focus:ring-teal-400/20 border-teal-200">
-                      <SelectValue placeholder="Select your main concern" />
+                      <SelectValue placeholder={formText.fields.skinConcerns.placeholder} />
                     </SelectTrigger>
                     <SelectContent className="border-teal-200 bg-white text-gray-800">
                       {skinConcernOptions.map(concern => (
@@ -341,40 +477,40 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
 
               <div className="space-y-2">
                 <Label htmlFor="previousTreatments" className="font-medium text-gray-700">
-                  Previous Beauty Treatments
+                  {formText.fields.previousTreatments.label}
                 </Label>
                 <Textarea
                   id="previousTreatments"
                   value={formData.previousTreatments}
                   onChange={e => handleInputChange('previousTreatments', e.target.value)}
                   className="min-h-[80px] resize-none border-teal-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400/20"
-                  placeholder="List any previous facial treatments, skincare routines, or current products..."
+                  placeholder={formText.fields.previousTreatments.placeholder}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="allergies" className="font-medium text-gray-700">
-                  Allergies & Sensitivities
+                  {formText.fields.allergies.label}
                 </Label>
                 <Textarea
                   id="allergies"
                   value={formData.allergies}
                   onChange={e => handleInputChange('allergies', e.target.value)}
                   className="min-h-[60px] resize-none border-teal-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400/20"
-                  placeholder="Please list any known allergies or skin sensitivities..."
+                  placeholder={formText.fields.allergies.placeholder}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="message" className="font-medium text-gray-700">
-                  Beauty Goals & Notes
+                  {formText.fields.message.label}
                 </Label>
                 <Textarea
                   id="message"
                   value={formData.message}
                   onChange={e => handleInputChange('message', e.target.value)}
                   className="min-h-[100px] resize-none border-teal-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400/20"
-                  placeholder="Tell us about your goals or questions..."
+                  placeholder={formText.fields.message.placeholder}
                 />
               </div>
             </section>
@@ -382,22 +518,22 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
             {/* Actions */}
             <div className="flex justify-end gap-3 border-t border-pink-100 pt-6">
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="border-gray-200 bg-white px-8 py-3 text-gray-700 hover:bg-gray-50">
-                Cancel
+                {formText.buttons.cancel}
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="px-8 py-3 font-medium text-white shadow-lg transition-all duration-300 hover:shadow-xl
-                           bg-gradient-to-r from-pink-400 via-[#0ABAB5] to-purple-400
-                           hover:from-pink-500 hover:via-[#0ABAB5]/90 hover:to-purple-500 disabled:opacity-50"
+                          bg-gradient-to-r from-pink-400 via-[#0ABAB5] to-purple-400
+                          hover:from-pink-500 hover:via-[#0ABAB5]/90 hover:to-purple-500 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                    Booking...
+                    {formText.buttons.submitting}
                   </span>
                 ) : (
-                  'Book Appointment'
+                  formText.buttons.submit
                 )}
               </Button>
             </div>

@@ -1,0 +1,49 @@
+{
+  "slides": [
+  {
+    "id": 1,
+    "title": "글래스 스킨 트리트먼트",
+    "subtitle": "소라 시그니처",
+    "description": "빛나는 유리 피부를 위한 소라의 시그니처 뷰티 시술을 경험해보세요. 맑고 투명하게 빛나는 피부를 선사합니다.",
+    "image": "./images/girl1.jpg",
+    "category": "글래스 스킨",
+    "color": "from-pink-50/80 to-rose-50/80"
+  },
+  {
+    "id": 2,
+    "title": "하이드라 부스트 테라피",
+    "subtitle": "수분 장벽 케어",
+    "description": "한국 스킨케어에서 영감을 받은 깊은 수분 공급 시술로 촉촉하고 탱탱한 피부를 유지하세요.",
+    "image": "./images/girl2.jpg",
+    "category": "수분 케어",
+    "color": "from-cyan-50/80 to-blue-50/80"
+  },
+  {
+    "id": 3,
+    "title": "BRIGHTENING ESSENCE",
+    "subtitle": "SoRaClinic 스킨부스터",
+    "description": "안전한 성분으로 피부 속 콜라겐 생성을 촉진하여 자연스럽게 피부 탄력과 수분감을 채워주는 시술입니다.",
+    "image": "./images/girl3.jpg",
+    "category": "Brightening",
+    "color": "from-yellow-50/80 to-amber-50/80"
+  },
+  {
+    "id": 4,
+    "title": "GLOW UP FACIAL",
+    "subtitle": "RADIANT COMPLEXION",
+    "description": "각종 피부질환(기미, 주근깨, 여드름)등의 피부 콤플렉스를 맞춤형 레이저 기기로 개선하실 수 있습니다.",
+    "image": "./images/girl4.jpg",
+    "category": "Glow Facial",
+    "color": "from-purple-50/80 to-pink-50/80"
+  },
+  {
+    "id": 5,
+    "title": "ANTI-AGING RITUAL",
+    "subtitle": "YOUTHFUL RADIANCE",
+    "description": "안티에이징은 주름, 처진 피부 등을 절개를 하는 것이 아닌 다양한 방법(고주파, 초음파)을 통해 처진 피부에 리프팅 효과를 주고 주름을 없애주어 더욱 아름다운 동안 얼굴을 만들어드립니다.",
+    "image": "./images/girl5.jpg",
+    "category": "Anti-Aging",
+    "color": "from-emerald-50/80 to-teal-50/80"
+  }
+  ]
+}

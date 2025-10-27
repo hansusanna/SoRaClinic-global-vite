@@ -1,4 +1,5 @@
-[
+{
+  "slides": [
   {
     "id": 1,
     "title": "글래스 스킨 트리트먼트",
@@ -44,4 +45,5 @@
     "category": "Anti-Aging",
     "color": "from-emerald-50/80 to-teal-50/80"
   }
-]
+  ]
+}
