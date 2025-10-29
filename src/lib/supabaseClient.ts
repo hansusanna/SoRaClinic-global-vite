@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
+console.log('VITE_SUPABASE_URL =', import.meta.env.VITE_SUPABASE_URL);
+console.log('VITE_SUPABASE_ANON_KEY length =', import.meta.env.VITE_SUPABASE_ANON_KEY?.length);
+
 // .env 파일에서 환경 변수를 가져옵니다.
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
