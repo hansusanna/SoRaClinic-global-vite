@@ -1,20 +1,16 @@
 import { useMemo, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
-
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Textarea } from './ui/textarea'
 import { Calendar } from './ui/calendar'
-
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { toast } from 'sonner'
-
 import type { BookingForm, BookingOptions } from '@/db/type/booking'
 import type { TreatmentPost } from '@/db/type/treatment';
-// import { projectId, publicAnonKey } from '../utils/supabase/info'
 
 import { supabase } from '@/lib/supabaseClient'
 
@@ -306,10 +302,10 @@ export default function BookingModal({ open, onOpenChange, preselectedTreatment 
 
      
       // 'supabase' 클라이언트를 직접 사용하여 'bookings' 테이블에 삽입
-      const { data, error } = await supabase
-    .from('bookings')
-    .insert(bookingData)
-    .select() // <-- 이것을 추가해야 data에 값이 들어옵니다.
+      const { error } = await supabase
+      .from('bookings')
+      .insert(bookingData)
+    
 
       if (error) {
         // RLS가 켜져있다면 여기서 'permission denied' 오류가 발생합니다.
@@ -319,16 +315,7 @@ export default function BookingModal({ open, onOpenChange, preselectedTreatment 
       // --- (수정 끝) ---
 
     // 성공 로직 (error가 없으면 성공)
-    if (data && data.length > 0) {
-      // data[0]가 방금 삽입된 예약 정보입니다.
-      console.log('성공적으로 삽입된 데이터:', data[0]);
-
-      // 예시: 토스트 메시지에 예약자 이름과 ID를 함께 표시
-      toast.success(`${data[0].name}님, 예약이 완료되었습니다. (예약 ID: ${data[0].id})`);
-    } else {
-      // data가 비어있는 비정상적인 경우 (이론상으론 error에서 걸러짐)
-      toast.success(formText.toast.success);
-    }
+    toast.success(formText.toast.success);
       
       // Reset
       setFormData({
